@@ -1,4 +1,4 @@
-# Mirá la app publicada acá:
+# See the app here:
 https://alfstore.netlify.app/
 
 # Getting Started with Create React App
