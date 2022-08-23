@@ -1,10 +1,12 @@
 import logo from './alf.png';
 import './App.css';
+import Navbar from './navbar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Navbar />
+      <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           React app de Gianluca Moriconi
@@ -17,7 +19,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </div>
     </div>
   );
 }
