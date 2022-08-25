@@ -52,3 +52,12 @@ html, body{
 h1, h2, h3, h4{
   font-family: 'Fredoka One', cursive;
 }
+
+.example-container-grid{
+  width: 90%;
+  height: 40vh;
+  border: 1px solid grey;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
