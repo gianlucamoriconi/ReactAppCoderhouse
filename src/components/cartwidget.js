@@ -3,7 +3,7 @@ import { BsCart2 } from 'react-icons/bs';
 const CartWidget = () => {
     return (
         <>
-        <div id="cart">
+        <div id="cartWidget">
             <a className="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
             <BsCart2 />
             </a>
