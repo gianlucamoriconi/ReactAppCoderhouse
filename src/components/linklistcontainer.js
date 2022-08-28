@@ -1,6 +1,6 @@
 const noneLink = "#"; //Esto es provisorio para la entrega del dia 22/08
 
-const ItemListContainer = () => {
+const LinkListContainer = () => {
      
     return (
         <>
@@ -39,4 +39,4 @@ const ItemListContainer = () => {
     )
 }
 
-export default ItemListContainer;
+export default LinkListContainer;

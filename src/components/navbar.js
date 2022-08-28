@@ -1,6 +1,6 @@
 import imageLogo from './alflogo.png';
-import Cart from './cart';
-import ListContainer from './listcontainer';
+import CartWidget from './cartwidget';
+import LinkListContainer from './linklistcontainer';
 import SearchForm from './searchform';
 const noneLink = "#"; //Esto es provisorio para la entrega del dia 22/08
 
@@ -19,12 +19,12 @@ const Navbar = () => {
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ListContainer />
+                            <LinkListContainer />
                             <SearchForm />
                         </div>
                     </div>  
             </nav>
-            <Cart />
+            <CartWidget />
         </div>
         </>
     )

@@ -1,6 +1,6 @@
 import { BsCart2 } from 'react-icons/bs';
 
-const Cart = () => {
+const CartWidget = () => {
     return (
         <>
         <div id="cart">
@@ -24,4 +24,4 @@ const Cart = () => {
     )
 }
 
-export default Cart;
+export default CartWidget;

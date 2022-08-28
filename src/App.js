@@ -1,12 +1,12 @@
 import './App.css';
 import Navbar from './components/navbar';
-import Bodyhome from './components/bodyhome.js';
+import ItemListContainer from './components/itemlistcontainer';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <Bodyhome />
+      <ItemListContainer greeting="La tienda de Alf!" />
     </div>
   )
 }
