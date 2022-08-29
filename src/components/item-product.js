@@ -37,7 +37,7 @@ const ItemProduct = (props) => {
     }
 
     useEffect( () => {
-        if (stock == 0){
+        if (stock === 0){
             setAddToCartButton("Sin stock")
         }
     }, [stock])
