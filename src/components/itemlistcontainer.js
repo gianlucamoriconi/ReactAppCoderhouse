@@ -1,3 +1,4 @@
+import ItemProduct from "./item-product";
 
 const ItemListContainer = (props) => {
     return (
@@ -6,6 +7,7 @@ const ItemListContainer = (props) => {
             <h1 className="pt-4 text-light">{props.greeting}!</h1>
             <div className="container example-container-grid">
                 {/*Aca llamaremos a cada item como componente desde item-product.js */}
+                <ItemProduct />
             </div>
         </div>
         </>        
