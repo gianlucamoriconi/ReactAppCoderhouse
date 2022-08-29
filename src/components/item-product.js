@@ -46,7 +46,7 @@ const ItemProduct = (props) => {
         <>
             <div className ="item">
                 <div className= "item-image">
-                    <img></img>
+                    {/* <img></img> */}
                 </div>
                 <div className= "item-info">
                     <div className="item-name text-light">
