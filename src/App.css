@@ -61,3 +61,20 @@ h1, h2, h3, h4{
   margin-top: 20px;
 }
 
+
+.item{
+  display: inline-block;
+  width: 300px;
+}
+
+
+.item-quantity {
+  border: 1px solid #fff3;
+  border-radius: 7px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.quantity{
+  margin: auto;
+}

@@ -1,4 +1,4 @@
-import imageLogo from './alflogo.png';
+import imageLogo from '../images/alflogo.png';
 import CartWidget from './cartwidget';
 import LinkListContainer from './linklistcontainer';
 import SearchForm from './searchform';
