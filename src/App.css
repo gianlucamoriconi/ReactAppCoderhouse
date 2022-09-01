@@ -78,3 +78,8 @@ h1, h2, h3, h4{
 .quantity{
   margin: auto;
 }
+
+.item-image img {
+  width: 100%;
+  height: auto;
+}
