@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
+import { BsEye } from 'react-icons/bs';
 
 const ItemCount = (props) => {
     
     const [counter, setCounter] = useState(1)
     const [addToCartButton, setAddToCartButton] = useState("Agregar al carrito")
-    const [stock, setStock] = useState(props.stock)   
+    const [stock, setStock] = useState(props.stock)
 
 
     const handleAddQuantity = () => {
-        console.log(counter);
         
         if (counter === stock ){
             console.log("No es posible sumar más unidades porque no hay suficiente stock");
@@ -21,7 +22,6 @@ const ItemCount = (props) => {
         if (counter > 1){
             setCounter(counter - 1)
         }
-        console.log(counter);
     }
 
     const handleAddToCart = () => {
@@ -49,7 +49,9 @@ const ItemCount = (props) => {
                     <span className={stock ? "text-light quantity" : "text-light quantity"}>{counter}</span>
                     <button onClick={handleAddQuantity} className={stock ? "quantity-add btn text-light ms-4" : "quantity-add btn text-light ms-4 disabled border-0"}>+</button>
                 </div>
-                <div><button onClick={handleAddToCart} className={stock ? "btn btn-primary" : "btn btn-primary disabled border-0"}>{addToCartButton}</button></div>
+                <div>
+                    <button onClick={handleAddToCart} className={stock ? "btn btn-primary w-100" : "btn btn-primary w-100 disabled border-0"}>{addToCartButton}</button>
+                </div>
             </div>
         </>        
     )

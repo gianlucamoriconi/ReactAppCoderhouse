@@ -1,38 +1,33 @@
-const noneLink = "#"; //Esto es provisorio para la entrega del dia 22/08
+import { Link } from 'react-router-dom';
+// import { useParams } from 'react-router-dom'; 
+
 
 const LinkListContainer = () => {
+    // const { categoryId } = useParams();
      
     return (
         <>
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href={noneLink}>Inicio</a>
+                <Link className="nav-link active" aria-current="page" to="/">Inicio</Link>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href={noneLink}>Todos los productos</a>
+                <Link className="nav-link" to="/productos">Todos los productos</Link>
             </li>
             <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href={noneLink} id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Accesorios
-                </a>
+                <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Categorías
+                </Link>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a className="dropdown-item" href={noneLink}>Tazas</a></li>
-                    <li><a className="dropdown-item" href={noneLink}>Mates</a></li>
-                    <li><hr className="dropdown-divider" /></li>
-                    <li><a className="dropdown-item" href={noneLink}>Quiero algo que no encontré</a></li>
+                    <li><Link className="dropdown-item" to="/productos/remeras">Remeras</Link></li>
+                    <li><Link className="dropdown-item" to="/productos/pantalones">Pantalones</Link></li>
+                    <li><Link className="dropdown-item" to="/productos/sueters-y-buzos">Sueters y buzos</Link></li>
+                    <li><Link className="dropdown-item" to="/productos/pijamas">Pijamas</Link></li>
+                    <li><Link className="dropdown-item" to="/productos/accesorios">Accesorios</Link></li>
                 </ul>
             </li>
-            <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href={noneLink} id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Indumentaria
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a className="dropdown-item" href={noneLink}>Remeras</a></li>
-                    <li><a className="dropdown-item" href={noneLink}>Buzos</a></li>
-                    <li><a className="dropdown-item" href={noneLink}>Pantalones</a></li>
-                    <li><hr className="dropdown-divider" /></li>
-                    <li><a className="dropdown-item" href={noneLink}>Quiero algo que no encontré</a></li>
-                </ul>
+            <li className="nav-item">
+                <Link className="nav-link" to="/">Quiero algo que no encontré</Link>
             </li>
         </ul>
         </>

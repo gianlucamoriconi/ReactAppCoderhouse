@@ -1,4 +1,4 @@
-import ItemProduct from "./item-product"
+import ItemProduct from "./itemProduct"
 
 const ItemList = ( {products = []} ) => {
     return (

@@ -79,7 +79,30 @@ h1, h2, h3, h4{
   margin: auto;
 }
 
+.item-image{
+  height: 400px;
+  width: auto;
+}
+
 .item-image img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+.h-80{
+  height: 80vh;
+}
+
+.max-width-200{
+  max-width: 200px;
+}
+
+.btn-primary{
+  font-family: 'Fredoka One', cursive;
+}
+
+#banner-image {
+  max-height: 60vh;
+  overflow: hidden;
 }
