@@ -26,7 +26,7 @@ const ItemDetailContainer = (props) => {
             .finally( ()=> {
                 setLoading(false);
             })
-    }, [])
+    }, [itemSlug])
 
     return (
         loading ? 

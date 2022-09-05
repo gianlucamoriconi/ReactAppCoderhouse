@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import { BsEye } from 'react-icons/bs';
 
 const ItemCount = (props) => {
     
@@ -50,7 +48,7 @@ const ItemCount = (props) => {
                     <button onClick={handleAddQuantity} className={stock ? "quantity-add btn text-light ms-4" : "quantity-add btn text-light ms-4 disabled border-0"}>+</button>
                 </div>
                 <div>
-                    <button onClick={handleAddToCart} className={stock ? "btn btn-primary w-100" : "btn btn-primary w-100 disabled border-0"}>{addToCartButton}</button>
+                    <button onClick={handleAddToCart} className={stock ? "btn btn-primary addtocart w-100" : "btn btn-primary addtocart w-100 disabled border-0"}>{addToCartButton}</button>
                 </div>
             </div>
         </>        

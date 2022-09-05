@@ -2,7 +2,7 @@ import ItemCount from "./itemCount";
 
 const ItemDetail = ({item}) => {
 
-    const {name, id, price, stock, image, categories, description} = item;
+    const {name, price, stock, image, description} = item;
 
 
     return (
