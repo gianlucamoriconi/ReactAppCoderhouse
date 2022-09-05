@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
+import { BsEye } from "react-icons/bs";
 
 const ItemCount = (props) => {
     
     const [counter, setCounter] = useState(1)
     const [addToCartButton, setAddToCartButton] = useState("Agregar al carrito")
-    const [stock, setStock] = useState(props.stock)
+    const [stock, setStock] = useState(props.stock);
+
+    //Boton ver mas
+    const seeMore = props.seeMore;
+    const productLink = props.productLink;
 
 
     const handleAddQuantity = () => {
@@ -47,8 +53,11 @@ const ItemCount = (props) => {
                     <span className={stock ? "text-light quantity" : "text-light quantity"}>{counter}</span>
                     <button onClick={handleAddQuantity} className={stock ? "quantity-add btn text-light ms-4" : "quantity-add btn text-light ms-4 disabled border-0"}>+</button>
                 </div>
-                <div>
+                <div className="d-flex">
                     <button onClick={handleAddToCart} className={stock ? "btn btn-primary addtocart w-100" : "btn btn-primary addtocart w-100 disabled border-0"}>{addToCartButton}</button>
+                    {seeMore === "true" ?
+                    <Link to={productLink} className="btn btn-primary addtocart border-0 ms-2"><BsEye /></Link>
+                    : null}
                 </div>
             </div>
         </>        

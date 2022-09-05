@@ -32,7 +32,8 @@ const ItemProduct = ({product}) => {
                     <div className="item-price text-light mb-4">
                         <span className="fw-bold">${price}</span>
                     </div>
-                    <ItemCount stock={stock} productLink={productLink}/>
+                    {/* //El seeMore true es para mostrar el boton Ver más (icono de ojo) */}
+                    <ItemCount stock={stock} productLink={productLink} seeMore="true"/>
                 </div>
             </div>
         </>        
