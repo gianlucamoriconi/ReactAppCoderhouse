@@ -16,10 +16,14 @@ const ItemDetail = ({item}) => {
                 <div className="p-4">
                     <h2 className="text-light text-left">{name}</h2>
                     <p className="fs-3 fw-bold">${price}</p>
-                    <div className="product-description">{description}</div>
                     <div className="max-width-200">
                         <ItemCount stock={stock}/>
                     </div>
+                    <div className="product-description text-light mt-5">
+                        <h5 className="product-description-title fw-bold mb-3">Descripción del producto</h5>
+                        <p className="fw-light">{description}</p>
+                    </div>
+
                 </div>
             </div>
             
