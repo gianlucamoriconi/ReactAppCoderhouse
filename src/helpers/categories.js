@@ -10,7 +10,7 @@ export const dataCategories = [{
  },
  {
     categoryId: 3,
-    categoryName: "Suetes y buzos",
+    categoryName: "Sueters y buzos",
     slug: "sueters-y-buzos",
  },
  {

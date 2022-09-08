@@ -10,8 +10,12 @@ const ItemListContainer = (props) => {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
     const { categorySlug } = useParams();
+    let categoryTitle = "Todos los productos";
+    
 
     let categoryWithSlug = dataCategories.filter(cat => cat.slug === categorySlug);
+    categoryTitle = categoryWithSlug[0].categoryName;
+  
     
     useEffect(() => {
         setLoading(true)
@@ -21,6 +25,8 @@ const ItemListContainer = (props) => {
                     setProducts(prod);
                 } else {
                     let idCat = categoryWithSlug[0].categoryId;
+                    prod.filter((prodFilter) => prodFilter.categoriesIds === idCat)
+                    
                     setProducts( prod.filter((prodFilter) => prodFilter.categoriesIds === idCat ))
                 }
                 
@@ -37,7 +43,7 @@ const ItemListContainer = (props) => {
     return (
 
         <div className="container p-4 text-center">
-            <h1 className="pt-4">{props.greeting}</h1>
+            <h1 className="pt-4">Categoría: {categoryTitle}</h1>
             <div className="container mt-5">
                 {loading ? 
                 <Ellipsis/>
