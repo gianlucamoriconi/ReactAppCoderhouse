@@ -7,7 +7,11 @@ export const products = [{
    stock: 10,
    categories: "Pantalones",
    categoriesIds: 2,
-   description: "Pantalón delgado para verano. 90% algodón - 10% poliester."
+   description: "Pantalón delgado para verano. 90% algodón - 10% poliester.",
+   property1: "Tamaño",
+   value1: ["S", "M", "L", "XL"],
+   property2: "Color",
+   value2: ["Rojo", "Amarillo", "Verde"]
 },
 {
    id: 2,
@@ -18,7 +22,11 @@ export const products = [{
    stock: 3,
    categories: "Sueters y buzos",
    categoriesIds: 3,
-   description: "100% algodón. Grueso."
+   description: "100% algodón. Grueso.",
+   property1: "Tamaño",
+   value1: ["S", "M", "L", "XL"],
+   property2: "Color",
+   value2: ["Rojo", "Amarillo", "Verde"]
 },
 {
    id: 3,
@@ -40,7 +48,11 @@ export const products = [{
    stock: 4,
    categories: "Remeras",
    categoriesIds: 1,
-   description: "100% algodón."
+   description: "100% algodón.",
+   property1: "Tamaño",
+   value1: ["S", "M", "L", "XL"],
+   property2: "Color",
+   value2: ["Rojo", "Amarillo", "Verde"]
 },
 {
    id: 5,
@@ -51,7 +63,11 @@ export const products = [{
    stock: 22,
    categories: "Pijamas",
    categoriesIds: 4,
-   description: "Nuevo pijama de Alf. Fresco, ideal para verano."
+   description: "Nuevo pijama de Alf. Fresco, ideal para verano.",
+   property1: "Tamaño",
+   value1: ["S", "M", "L", "XL"],
+   property2: "Color",
+   value2: ["Rojo", "Amarillo", "Verde"]
 },
 {
    id: 6,

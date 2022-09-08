@@ -47,14 +47,14 @@ const ItemCount = (props) => {
     return (
         <>
             <div className="item-actions" data-stock={stock}>
-                <p className={stock ? "text-light mb-2 fw-light" : "text-light mb-2 fw-light invisible"}>Stock disponible: {stock}</p>
+                <p className={stock ? "mb-2 fw-light" : " mb-2 fw-light invisible"}>Stock disponible: {stock}</p>
                 <div className="item-quantity mb-3">
-                    <button onClick={handleSubtractQuantity} className={stock ? "quantity-rest btn text-light me-4" : "disabled quantity-rest btn text-light me-4 border-0"}>-</button>
-                    <span className={stock ? "text-light quantity" : "text-light quantity"}>{counter}</span>
-                    <button onClick={handleAddQuantity} className={stock ? "quantity-add btn text-light ms-4" : "quantity-add btn text-light ms-4 disabled border-0"}>+</button>
+                    <button onClick={handleSubtractQuantity} className={stock ? "quantity-rest btn  me-4" : "disabled quantity-rest btn  me-4 border-0"}>-</button>
+                    <span className={stock ? "quantity" : " quantity"}>{counter}</span>
+                    <button onClick={handleAddQuantity} className={stock ? "quantity-add btn  ms-4" : "quantity-add btn  ms-4 disabled border-0"}>+</button>
                 </div>
                 <div className="d-flex">
-                    <button onClick={handleAddToCart} className={stock ? "btn btn-primary addtocart w-100" : "btn btn-primary addtocart w-100 disabled border-0"}>{addToCartButton}</button>
+                    <button onClick={handleAddToCart} className={stock ? "btn btn-primary addtocart w-100 fw-bold" : "btn btn-primary addtocart w-100 disabled border-0 fw-bold"}>{addToCartButton}</button>
                     {seeMore === "true" ?
                     <Link to={productLink} className="btn btn-primary addtocart border-0 ms-2"><BsEye /></Link>
                     : null}

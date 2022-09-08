@@ -1,4 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+  --primary-accent-color: #c09535;
+  --bs-btn-active-border-color: #ffde95b4;
+  --bs-btn-active-bg: #ffde95b4;
+  --bs-btn-active-color: #ffde95b4;
+}
+
+*{
+  font-family: 'Roboto Slab', serif;
+}
 
 .App {
   text-align: center;
@@ -16,7 +28,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #c1fcff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,12 +38,15 @@
   color: white;
 }
 
-.App-link {
+/* .App-link {
   color: #61dafb;
-}
+} */
 
 html, body{
-  background-color: #282c34; 
+  background-color: #c1fcff;
+  background-image: url("https://dolcefilipa.com/space-pattern-opacity.png");
+  background-repeat: repeat;
+  background-size: 10%; 
 }
 
 @keyframes App-logo-spin {
@@ -50,7 +65,8 @@ html, body{
 
 
 h1, h2, h3, h4{
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 900;
 }
 
 .example-container-grid{
@@ -69,7 +85,7 @@ h1, h2, h3, h4{
 
 
 .item-quantity {
-  border: 1px solid #fff3;
+  border: 1px solid #0000001a;
   border-radius: 7px;
   display: flex;
   justify-content: space-between;
@@ -80,7 +96,7 @@ h1, h2, h3, h4{
 }
 
 .item-image{
-  height: 400px;
+  height: 350px;
   width: auto;
 }
 
@@ -99,10 +115,40 @@ h1, h2, h3, h4{
 }
 
 .btn-primary{
-  font-family: 'Fredoka One', cursive;
+  font-family: 'Roboto Slab', serif;
 }
 
 #banner-image {
   max-height: 60vh;
   overflow: hidden;
+}
+
+a{
+  color: grey;
+  transition: 0.2s;
+}
+
+a:hover{
+  color:var(--primary-accent-color);
+  transition: 0.2s;
+}
+
+.btn-primary{
+  color: grey;
+  background-color:#ffde95b4 ;
+  border-color: #ffde95b4;
+}
+
+
+.btn:hover, .btn-check:active+.btn, .btn-check:checked+.btn, .btn.active, .btn.show, .btn:active{
+  --bs-btn-bg: var(--primary-accent-color);
+  --bs-btn-border-color: var(--primary-accent-color);
+  --bs-btn-active-color: #ffffff;
+  background-color: var(--primary-accent-color);
+  border-color: var(--primary-accent-color);
+
+}
+
+.nav-link{
+  font-family: 'Roboto Slab', serif;
 }

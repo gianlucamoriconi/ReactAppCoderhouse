@@ -37,7 +37,7 @@ const ItemListContainer = (props) => {
     return (
 
         <div className="container p-4 text-center">
-            <h1 className="pt-4 text-light">{props.greeting}</h1>
+            <h1 className="pt-4">{props.greeting}</h1>
             <div className="container mt-5">
                 {loading ? 
                 <Ellipsis/>
