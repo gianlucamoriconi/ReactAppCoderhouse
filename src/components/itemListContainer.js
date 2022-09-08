@@ -9,22 +9,25 @@ import { useParams } from 'react-router-dom';
 const ItemListContainer = (props) => {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
+    const [categoryTitle, setCategoryTitle] = useState("Todos los productos");
     const { categorySlug } = useParams();
-    let categoryTitle = "Todos los productos";
     
-
     let categoryWithSlug = dataCategories.filter(cat => cat.slug === categorySlug);
-    categoryTitle = categoryWithSlug[0].categoryName;
-  
-    
+
+
     useEffect(() => {
         setLoading(true)
+        setCategoryTitle("");
+
         getProducts()
             .then( (prod) =>{
                 if (!categorySlug){
                     setProducts(prod);
+                    setCategoryTitle("Todos los productos");
+
                 } else {
                     let idCat = categoryWithSlug[0].categoryId;
+                    setCategoryTitle(categoryWithSlug[0].categoryName)
                     prod.filter((prodFilter) => prodFilter.categoriesIds === idCat)
                     
                     setProducts( prod.filter((prodFilter) => prodFilter.categoriesIds === idCat ))
@@ -43,7 +46,7 @@ const ItemListContainer = (props) => {
     return (
 
         <div className="container p-4 text-center">
-            <h1 className="pt-4">Categoría: {categoryTitle}</h1>
+            <h1 className="pt-4">{categoryTitle}</h1> 
             <div className="container mt-5">
                 {loading ? 
                 <Ellipsis/>
