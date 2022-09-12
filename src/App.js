@@ -1,4 +1,4 @@
-import './App.css';
+import './scss/styles.scss';
 import Header from './components/header';
 import Home from './components/home';
 import ItemListContainer from './components/itemListContainer';

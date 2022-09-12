@@ -9,9 +9,6 @@ const ItemDetailContainer = (props) => {
     const [loading, setLoading] = useState(true)
     const [item, setItem] = useState(null)
     const {itemSlug} = useParams()
-
-
-    console.log(item);
  
     useEffect(() => {
         setLoading(true)

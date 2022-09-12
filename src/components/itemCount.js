@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { BsEye } from "react-icons/bs";
 
 const ItemCount = (props) => {
-    
+    const name = props.name;
+    const addToCart = props.addToCart;
     const [counter, setCounter] = useState(1)
     const [addToCartButton, setAddToCartButton] = useState("Agregar al carrito")
     const [stock, setStock] = useState(props.stock);
@@ -31,6 +32,7 @@ const ItemCount = (props) => {
     const handleAddToCart = () => {
         if (counter <= stock){
             setStock(stock - counter);
+            addToCart(counter, name);
         } else{
             alert("No hay suficiente stock. Prueba agregar menos unidades")
         }

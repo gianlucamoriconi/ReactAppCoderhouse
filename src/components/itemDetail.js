@@ -3,13 +3,17 @@ import ItemCount from "./itemCount";
 const ItemDetail = ({item}) => {
 
     const {name, price, stock, image, description} = item;
+   
+    const addToCart = (counter) => {
+        console.log(`${counter} ${name} agregados al carrito`)
+    }
 
 
     return (
         <div className="row m-0 m-5 shadow bg-body rounded">
             <div className="col-12 col-lg-3 p-0">
-                <div>
-                    <img className="w-100 rounded" src={image} alt={"product"}></img>
+                <div className="img-container">
+                    <img className="w-100 rounded img-product" src={image} alt={"product"}></img>
                 </div>
             </div>
             <div className="col-12 col-lg-9 ps-4">
@@ -17,7 +21,7 @@ const ItemDetail = ({item}) => {
                     <h2 className="fs-1 text-left">{name}</h2>
                     <p className="fs-2 fw-bold">${price}</p>
                     <div className="max-width-200 mb-5">
-                        <ItemCount stock={stock}/>
+                        <ItemCount stock={stock} name={name} item={item} addToCart={addToCart}/>
                     </div>
                     <hr></hr>
                     <div className="product-description ">

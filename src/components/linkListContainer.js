@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
-// import { useParams } from 'react-router-dom'; 
+import { dataCategories } from '../helpers/categories.js';
 
 
 const LinkListContainer = () => {
-    // const { categoryId } = useParams();
      
     return (
         <>
@@ -19,11 +18,9 @@ const LinkListContainer = () => {
                     Categorías
                 </Link>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><Link className="dropdown-item" to="/productos/remeras">Remeras</Link></li>
-                    <li><Link className="dropdown-item" to="/productos/pantalones">Pantalones</Link></li>
-                    <li><Link className="dropdown-item" to="/productos/sueters-y-buzos">Sueters y buzos</Link></li>
-                    <li><Link className="dropdown-item" to="/productos/pijamas">Pijamas</Link></li>
-                    <li><Link className="dropdown-item" to="/productos/accesorios">Accesorios</Link></li>
+                    {dataCategories.map((category) => {
+                        return <li key={category.categoryId}><Link className="dropdown-item" to={"/productos/" + category.slug}  >{category.categoryName}</Link></li>
+                    })}
                 </ul>
             </li>
             <li className="nav-item">
