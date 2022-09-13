@@ -1,7 +1,6 @@
 import ItemCount from "./itemCount";
 import { Link } from 'react-router-dom';
 import { dataCategories } from '../helpers/categories.js';
-import { addToCart } from '../helpers/addToCart.js';
 
 const ItemProduct = ({product}) => {
 
@@ -34,7 +33,7 @@ const ItemProduct = ({product}) => {
                         <span className="fw-bold item-price fs-4">${price}</span>
                     </div>
                     {/* //El seeMore true es para mostrar el boton Ver más (icono de ojo) */}
-                    <ItemCount stock={stock} name={name} productLink={productLink} addToCart={addToCart} seeMore="true"/>
+                    <ItemCount stock={stock} name={name} productLink={productLink} seeMore="true"/>
                 </div>
             </div>
         </>        
