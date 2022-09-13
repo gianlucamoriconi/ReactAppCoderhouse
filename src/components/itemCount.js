@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { BsEye } from "react-icons/bs";
-import { addToCart } from '../helpers/addToCart.js';
 
 const ItemCount = (props) => {
     const name = props.name;

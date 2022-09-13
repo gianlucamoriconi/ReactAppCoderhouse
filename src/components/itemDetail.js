@@ -1,5 +1,5 @@
 import ItemCount from "./itemCount";
-
+import { addToCart } from '../helpers/addToCart.js';
 
 const ItemDetail = ({item}) => {
 
@@ -18,7 +18,7 @@ const ItemDetail = ({item}) => {
                     <h2 className="fs-1 text-left">{name}</h2>
                     <p className="fs-2 fw-bold">${price}</p>
                     <div className="max-width-200 mb-5">
-                        <ItemCount stock={stock} name={name} item={item}/>
+                        <ItemCount stock={stock} name={name} item={item} addToCart={addToCart}/>
                     </div>
                     <hr></hr>
                     <div className="product-description ">
