@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { BsEye } from "react-icons/bs";
 
 const ItemCount = (props) => {
+    const item = props.item;
+    console.log(item);
     const name = props.name;
     const addToCart = props.addToCart;
     const [counter, setCounter] = useState(1)

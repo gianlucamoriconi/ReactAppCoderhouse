@@ -2,7 +2,7 @@ const SearchForm = () => {
      
     return (
         <>
-            <form className="d-flex">
+            <form className="d-flex col-4">
                 <input className="form-control me-2" type="search" placeholder="Buscar un producto..." aria-label="Search" />
                 <button className="btn btn-outline-success" type="submit">Buscar</button>
             </form>

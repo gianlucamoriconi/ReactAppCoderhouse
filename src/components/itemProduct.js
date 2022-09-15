@@ -6,21 +6,21 @@ import { addToCart } from '../helpers/addToCart.js';
 const ItemProduct = ({product}) => {
 
  
-    const {id, image, name, price, stock, categories, categoriesIds, slug} = product;
+    const {id, featuredImage, images, name, price, stock, categories, categoriesIds, slug} = product;
 
     //Obtenemos el slug del producto para generar el link hacia el
     const productLink = "/producto/" + slug;
    
     //Obtenemos el slug de la categoria para generar el link hacia ella
     let productCategory = dataCategories.filter(cat => cat.categoryId === categoriesIds);
-    let categoryLink = "/productos/" + productCategory[0].slug;
+    let categoryLink = "/categoria/" + productCategory[0].slug;
 
     return (
         <>
             <div className ="item p-0 col-6 col-md-4 col-lg-3 bg-body rounded" key={id}>
                 <div className= "item-image">
                 <Link to={productLink}>
-                    <img className="rounded" src={image} alt={"product"}></img>
+                    <img className="rounded" src={featuredImage} alt={"product"}></img>
                 </Link>
                 </div>
                 <div className= "item-info p-3">
@@ -31,7 +31,7 @@ const ItemProduct = ({product}) => {
                         <Link to={productLink} className="text-decoration-none "><h4>{name}</h4></Link>
                     </div>
                     <div className="item-price-container mb-4">
-                        <span className="fw-bold item-price fs-4">${price}</span>
+                        <span className="fw-bold item-price fs-4">${new Intl.NumberFormat('es-AR').format(price)}</span>
                     </div>
                     {/* //El seeMore true es para mostrar el boton Ver más (icono de ojo) */}
                     <ItemCount stock={stock} name={name} productLink={productLink} addToCart={addToCart} seeMore="true"/>

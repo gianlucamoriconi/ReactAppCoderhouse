@@ -10,9 +10,18 @@ const ItemListContainer = (props) => {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
     const [categoryTitle, setCategoryTitle] = useState("Todos los productos");
+    const [categoryImage, setCategoryImage] = useState("https://media.idownloadblog.com/wp-content/uploads/2019/09/Apple-Innovation-Event-banner.jpg");
     const { categorySlug } = useParams();
     
+
+    let backgroundImage = {
+        backgroundImage: 'url(' + categoryImage + ')',
+        height: '200px',
+        backgroundSize: "cover",
+        backgroundPosition: "center"
+      };
     let categoryWithSlug = dataCategories.filter(cat => cat.slug === categorySlug);
+    categoryWithSlug = categoryWithSlug[0];
 
 
     useEffect(() => {
@@ -24,10 +33,12 @@ const ItemListContainer = (props) => {
                 if (!categorySlug){
                     setProducts(prod);
                     setCategoryTitle("Todos los productos");
+                    setCategoryImage("https://media.idownloadblog.com/wp-content/uploads/2019/09/Apple-Innovation-Event-banner.jpg");
 
                 } else {
-                    let idCat = categoryWithSlug[0].categoryId;
-                    setCategoryTitle(categoryWithSlug[0].categoryName)
+                    let idCat = categoryWithSlug.categoryId;
+                    setCategoryTitle(categoryWithSlug.categoryName)
+                    setCategoryImage(categoryWithSlug.categoryImage)
                     prod.filter((prodFilter) => prodFilter.categoriesIds === idCat)
                     
                     setProducts( prod.filter((prodFilter) => prodFilter.categoriesIds === idCat ))
@@ -45,8 +56,12 @@ const ItemListContainer = (props) => {
 
     return (
 
-        <div className="p-4 text-center">
-            <h1 className="pt-4">{categoryTitle}</h1> 
+        <div className="text-center container-products overflow-hidden mb-5">
+            <div className="category-title-container d-flex justify-content-center" style={backgroundImage}>
+                <div className="back-opacity d-flex h-200 w-100">
+                    <h1 className="d-flex m-auto text-light justify-content-center">{categoryTitle}</h1> 
+                </div>
+            </div>
             <div className="mt-5">
                 {loading ? 
                 <Ellipsis/>

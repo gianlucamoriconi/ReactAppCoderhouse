@@ -1,10 +1,10 @@
 
 const BannerImage = () => {
-    const image = "https://dolcefilipa.com/alfbannerwide.jpeg";
+    const image = "https://www.apple.com/la/iphone/home/images/overview/hero/iphone_14_hero__ceub5xriecgi_large_2x.jpg";
     return (
         <>
-        <div id="banner-image" className="w-100 d-flex">
-            <img className="banner-image-img w-100" src={image}/>
+        <div id="banner-image" className="w-100 d-flex justify-content-center mb-5">
+            <img className="banner-image-img" src={image}/>
         </div>
         </>        
     )
