@@ -10,6 +10,7 @@ const ItemCount = (props) => {
     const [stock, setStock] = useState(props.stock);
 
     //Boton ver mas
+    const buttonAddToCart = props.buttonAddToCart;
     const seeMore = props.seeMore;
     const productLink = props.productLink;
 
@@ -55,9 +56,11 @@ const ItemCount = (props) => {
                     <button onClick={handleAddQuantity} className={stock ? "quantity-add btn  ms-4" : "quantity-add btn  ms-4 disabled border-0"}>+</button>
                 </div>
                 <div className="d-flex">
-                    <button onClick={() => { handleAddToCart(); handleStock();}} className={stock ? "btn btn-primary addtocart w-100 fw-bold" : "btn btn-primary addtocart w-100 disabled border-0 fw-bold"}>{addToCartButton}</button>
+                    {buttonAddToCart === "true" ?
+                        <button onClick={() => { handleAddToCart(); handleStock();}} className={stock ? "btn btn-primary addtocart w-100 fw-bold" : "btn btn-primary addtocart w-100 disabled border-0 fw-bold"}>{addToCartButton}</button>
+                    :null}
                     {seeMore === "true" ?
-                    <Link to={productLink} className="btn btn-primary addtocart border-0 ms-2"><BsEye /></Link>
+                    <Link to={productLink} className="btn btn-primary addtocart border-0 w-100 ms-2">Ver producto</Link>
                     : null}
                 </div>
             </div>

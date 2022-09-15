@@ -64,7 +64,7 @@ const ItemDetail = ({item}) => {
                         <Variants property1={property1} value1={value1} property2={property2} value2={value2} setOption1={setOption1} setOption2={setOption2}/>
                     : null}
                     <div className="max-width-200 mb-5">
-                        <ItemCount stock={stock} name={name} item={item} addToCart={handleAddToCart} setCounter={setCounter} counter={counter}/>
+                        <ItemCount stock={stock} name={name} item={item} addToCart={handleAddToCart} setCounter={setCounter} counter={counter} buttonAddToCart="true"/>
                     </div>
                     <hr></hr>
                     <div className="product-description ">
