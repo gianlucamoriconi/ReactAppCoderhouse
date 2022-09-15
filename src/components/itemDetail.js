@@ -1,5 +1,5 @@
 import ItemCount from "./itemCount";
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import ImagesInDetail from "./imagesInDetail";
 import Variants from "./variants";
 import { addToCart } from '../helpers/addToCart.js';
@@ -11,8 +11,21 @@ const ItemDetail = ({item}) => {
     console.log(cart);
 
     const {name, price, stock, featuredImage, images, description, property1, value1, property2, value2} = item;
-    const [option1, setOption1] = useState(item.value1);
-    const [option2, setOption2] = useState(item.value2);
+    const [option1, setOption1] = useState(null);
+    const [option2, setOption2] = useState(null);
+
+    useEffect( () => {
+        if (value1 !== null){
+            setOption1(item.value1[0].id);
+        }
+    
+        if (value2 !== null){
+            setOption2(item.value2[0].id);
+        }
+    }, [])
+
+
+    const [counter, setCounter] = useState(1);
 
     let hasVariants = false;
 
@@ -20,6 +33,20 @@ const ItemDetail = ({item}) => {
         hasVariants = true;
     } else{
         hasVariants = false;
+    }
+
+    
+    const handleAddToCart = () => {
+
+        const itemToCart = {
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            option1: option1,
+            option2: option2,
+            quantity: counter
+        }
+        console.log(itemToCart);
     }
 
     return (
@@ -37,7 +64,7 @@ const ItemDetail = ({item}) => {
                         <Variants property1={property1} value1={value1} property2={property2} value2={value2} setOption1={setOption1} setOption2={setOption2}/>
                     : null}
                     <div className="max-width-200 mb-5">
-                        <ItemCount stock={stock} name={name} item={item} addToCart={addToCart}/>
+                        <ItemCount stock={stock} name={name} item={item} addToCart={handleAddToCart} setCounter={setCounter} counter={counter}/>
                     </div>
                     <hr></hr>
                     <div className="product-description ">
