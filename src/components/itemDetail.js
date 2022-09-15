@@ -2,12 +2,11 @@ import ItemCount from "./itemCount";
 import { useState, useContext, useEffect } from 'react';
 import ImagesInDetail from "./imagesInDetail";
 import Variants from "./variants";
-import { addToCart } from '../helpers/addToCart.js';
 import { CartContext } from "../context/cartContext";
 
 const ItemDetail = ({item}) => {
     
-    const { cart, setCart } = useContext(CartContext);
+    const { cart, addToCart } = useContext(CartContext);
     console.log(cart);
 
     const {name, price, stock, featuredImage, images, description, property1, value1, property2, value2} = item;
@@ -47,6 +46,7 @@ const ItemDetail = ({item}) => {
             quantity: counter
         }
         console.log(itemToCart);
+        addToCart(itemToCart);
     }
 
     return (

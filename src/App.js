@@ -10,11 +10,15 @@ import { CartContext } from './context/cartContext';
  
 function App() {
   const [cart, setCart] = useState([])
+  
+  const addToCart = (item) => {
+    setCart([...cart, item])
+  }
 
   return (
     <CartContext.Provider value={{
       cart,
-      setCart
+      addToCart
     }}>
       <BrowserRouter>
         <Header />
