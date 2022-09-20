@@ -309,3 +309,18 @@ select{
 #cart-page .container{
   max-width: 1200px;
 }
+
+.cart-widget-amount{
+  font-size: 10px;
+  position: absolute;
+  top: 19px;
+  right: 12px;
+  border-radius: 50%;
+  height: 17px;
+  width: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  color: white;
+}

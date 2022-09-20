@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "../context/cartContext";
 import { Link } from 'react-router-dom';
 import { IoMdTrash } from 'react-icons/io';
@@ -9,7 +9,6 @@ const Cart = () => {
 
     const { cart, removeItem } = useContext(CartContext);
     console.log(cart);
-
 
     return (
         <div id="cart-page">

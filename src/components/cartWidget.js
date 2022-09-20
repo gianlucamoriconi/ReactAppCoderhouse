@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 
 
 const CartWidget = () => {
-    const { cart, removeItem } = useContext(CartContext);
+    const { cart, removeItem, itemsQuantity } = useContext(CartContext);
 
 
         return (
             <div id="cartWidget">
                 <a className="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                <BsCart2 />
+                <div className='d-flex'><BsCart2 /><span className='cart-widget-amount'>{cart.length}</span></div>
                 </a>
 
                 <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
