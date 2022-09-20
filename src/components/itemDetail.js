@@ -17,28 +17,15 @@ const ItemDetail = ({item}) => {
     useEffect( () => {
         //Si tiene valor en propiedad 1, cambiamos el null por el valor de la misma 
         if (value1 !== null){
-            setOption1(item.value1[0].id);
+            setOption1(document.querySelector("select#propiedad-1").value);
         }
     
         //Si tiene valor en propiedad 2, cambiamos el null por el valor de la misma 
         if (value2 !== null){
-            setOption2(item.value2[0].id);
+            setOption2(document.querySelector("select#propiedad-2").value);
         }
     }, [option1, option2])
 
-
-    useEffect( () => {
-        //Si tiene valor en propiedad 1, cambiamos el null por el valor de la misma 
-        if (value1 !== null){
-            setOption1(item.value1[0].id);
-        }
-    
-        //Si tiene valor en propiedad 2, cambiamos el null por el valor de la misma 
-        if (value2 !== null){
-            setOption2(item.value2[0].id);
-        }
-    }, [option1, option2])
-        
   
 
     let hasVariants = false;

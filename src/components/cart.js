@@ -53,10 +53,11 @@ const Cart = () => {
                                 <hr/>
                             </div>
                         ))}
-                    <div className='p-3'>
+                    {cart.length > 0 ?<div className='p-3'>
                         <Link to="/todos-los-productos" className="btn btn-secondary me-3">Seguir comprando</Link>
                         <Link to="/checkout" className="btn btn-primary">Finalizar compra</Link>
                     </div>
+                    : null}
                     </div>
                 </div>
             </div>
