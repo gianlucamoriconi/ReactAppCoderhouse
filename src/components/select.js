@@ -1,11 +1,11 @@
-const Select = ({options = [], onSelect}) => {
+const Select = ({options = [], onSelect, property}) => {
 
     const handleSelect = (e) => {
         onSelect(e.target.value);
     }
 
     return(
-        <select onChange={handleSelect}>
+        <select id={property} onChange={handleSelect}>
             {
                 options.map((opt) => {
                     return <option key={opt.id} value={opt.id}>{opt.text}</option>

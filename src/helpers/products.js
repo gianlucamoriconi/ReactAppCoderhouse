@@ -16,7 +16,8 @@ export const products = [{
       id: 3,
       url: "https://www.macstation.com.ar/img/productos/2593-4.jpg"
    }],
-   stock: 10,
+   stock: null,
+   stockSimple: 15,
    categories: "iPhone",
    categoriesIds: 1,
    description: "Un sistema de cámaras mucho más poderoso. Una pantalla con respuesta inmediata en cada interacción. El chip de smartphone más rápido del mundo. Un diseño increíblemente resistente. Y un gran salto en duración de batería.",
@@ -67,15 +68,6 @@ export const products = [{
       {
          productId: 2,
          value1: "128-GB",
-         value2: "graphite",
-         price: 710900,
-         stock: 10,
-         imageId: 1,
-         text: "Graphite 128 GB"
-      },
-      {
-         productId: 3,
-         value1: "128-GB",
          value2: "silver",
          price: 710900,
          stock: 10,
@@ -83,7 +75,7 @@ export const products = [{
          text: "Graphite 256 GB"
       },
       {
-         productId: 4,
+         productId: 3,
          value1: "128-GB",
          value2: "sierra-blue",
          price: 710900,
@@ -92,7 +84,7 @@ export const products = [{
          text: "Graphite 512 GB"
       },
       {
-         productId: 5,
+         productId: 4,
          value1: "128-GB",
          value2: "gold",
          price: 710900,
@@ -101,7 +93,7 @@ export const products = [{
          text: "Silver 128 GB"
       },
       {
-         productId: 6,
+         productId: 5,
          value1: "256-GB",
          value2: "graphite",
          price: 710900,
@@ -110,7 +102,7 @@ export const products = [{
          text: "Silver 256 GB"
       },
       {
-         productId: 7,
+         productId: 6,
          value1: "256-GB",
          value2: "silver",
          price: 710900,
@@ -119,7 +111,7 @@ export const products = [{
          text: "Silver 512 GB"
       },
       {
-         productId: 8,
+         productId: 7,
          value1: "256-GB",
          value2: "sierra-blue",
          price: 710900,
@@ -128,7 +120,7 @@ export const products = [{
          text: "Gold 128 GB"
       },
       {
-         productId: 9,
+         productId: 8,
          value1: "256-GB",
          value2: "gold",
          price: 710900,
@@ -137,7 +129,7 @@ export const products = [{
          text: "Gold 256 GB"
       },
       {
-         productId: 10,
+         productId: 9,
          value1: "512-GB",
          value2: "graphite",
          price: 710900,
@@ -146,7 +138,7 @@ export const products = [{
          text: "Gold 512 GB"
       },
       {
-         productId: 11,
+         productId: 10,
          value1: "512-GB",
          value2: "silver",
          price: 710900,
@@ -155,7 +147,7 @@ export const products = [{
          text: "Gold 512 GB"
       },
       {
-         productId: 12,
+         productId: 11,
          value1: "512-GB",
          value2: "sierra-blue",
          price: 710900,
@@ -164,7 +156,7 @@ export const products = [{
          text: "Gold 512 GB"
       },
       {
-         productId: 13,
+         productId: 12,
          value1: "512-GB",
          value2: "gold",
          price: 710900,
@@ -185,6 +177,7 @@ export const products = [{
       url: "https://www.macstation.com.ar/img/productos/2557-1663-apple-airpods-pro.jpg",
    }],
    stock: 3,
+   stockSimple: 15,
    categories: "AirPods",
    categoriesIds: 5,
    description: "Su diseño a medida se ajusta a la forma del oido y ofrece un aislamiento ideal para la cancelación activa de ruido. Es como si dentro de tus oídos solo hubiera música.",
@@ -204,19 +197,20 @@ export const products = [{
       url: "https://www.macstation.com.ar/img/productos/small/1984-1.jpg"
    }],
    stock: 1,
+   stockSimple: 15,
    categories: "iPad",
    categoriesIds: 3,
    description: "El iPad Air hace más que un ordenador y usarlo es tan fácil que a veces parece magia. Y con las nuevas prestaciones es más versátil que nunca.",
-   property1: "",
+   property1: null,
    value1: null,
-   property2: "",
+   property2: null,
    value2: null
 },
 {
    id: 4,
    name: "Apple Watch Series 7 GPS - 41mm",
    slug: "apple-watch-series-7-gps",
-   price: 2500,
+   price: 75000,
    featuredImage: "https://www.macstation.com.ar/img/productos/2685-1.jpg",
    images: [{
       id: 1,
@@ -238,7 +232,8 @@ export const products = [{
       id: 5,
       url: "https://www.macstation.com.ar/img/productos/2689-5.jpg"
    }],
-   stock: 4,
+   stock: null,
+   stockSimple: 15,
    categories: "Apple Watch",
    categoriesIds: 4,
    description: 'La renovada experiencia del Apple Watch Series 7 gira en torno a su gran pantalla, en la que todo resulta increíblemente fácil de usar y leer. Este reloj es nuestra mayor y más brillante creación hasta el momento.',
@@ -263,28 +258,40 @@ export const products = [{
    value2: null,
    variants:[
       {
-         id: 14,
-         text: "Medianoche 128 GB"
+         productId: 13,
+         value1: "medianoche",
+         value2: null,
+         price: 75000,
+         stock: 10,
+         imageId: 1,
+         text: "Medianoche"
       },
       {
-         id: 15,
-         text: "Graphite 256 GB"
+         productId: 14,
+         value1: "plateado-y-correa-blanca",
+         value2: null,
+         price: 75000,
+         stock: 10,
+         imageId: 1,
+         text: "Plateado y correa blanca"
       },
       {
-         id: 16,
-         text: "Graphite 512 GB"
+         productId: 15,
+         value1: "verde",
+         value2: null,
+         price: 75000,
+         stock: 10,
+         imageId: 1,
+         text: "Verde"
       },
       {
-         id: 17,
-         text: "Silver 128 GB"
-      },
-      {
-         id: 18,
-         text: "Silver 256 GB"
-      },
-      {
-         id: 19,
-         text: "Silver 512 GB"
+         productId: 16,
+         value1: "rojo",
+         value2: null,
+         price: 75000,
+         stock: 10,
+         imageId: 1,
+         text: "Rojo"
       }
    ]
 },
@@ -306,7 +313,8 @@ export const products = [{
       id: 3,
       url: "https://cdn-ipoint.waugi.com.ar/20565-medium_default/macbook-air-13-m1-2020-8-core-cpu-256-gb-gold.jpg"
    }],
-   stock: 22,
+   stock: null,
+   stockSimple: 15,
    categories: "Mac",
    categoriesIds: 2,
    description: "El chip M1 de Apple redefine nuestro portátil más fino y ligero. La CPU es hasta 3,5 veces más potente. Los gráficos, hasta cinco veces más rápidos. Un Neural Engine más avanzado llega a multiplicar por nueve la velocidad del aprendizaje automático. Además, es el MacBook Air con mayor autonomía y tiene un diseño sin ventilador que lo vuelve ultrasilencioso. Descubre un talento sin precedentes listo para seguirte a cualquier parte.",
@@ -326,13 +334,69 @@ export const products = [{
    ],
    property2: "Memoria",
    value2: [{
-      id: "256",
-      text: "256"
+      id: "256-GB",
+      text: "256 GB"
    }, 
    {
-      id: "512",
-      text: "512"
-   }]
+      id: "512-GB",
+      text: "512 GB"
+   }],
+   variants: [
+      {
+         productId: 17,
+         value1: "space-gray",
+         value2: "256-GB",
+         price: 330000,
+         stock: 10,
+         imageId: 1,
+         text: "Space Gray 256 GB"
+      },
+      {
+         productId: 18,
+         value1: "space-gray",
+         value2: "512-GB",
+         price: 330000,
+         stock: 10,
+         imageId: 1,
+         text: "Space Gray 512 GB"
+      },
+      {
+         productId: 19,
+         value1: "silver",
+         value2: "256-GB",
+         price: 330000,
+         stock: 16,
+         imageId: 1,
+         text: "Silver 256 GB"
+      },
+      {
+         productId: 20,
+         value1: "silver",
+         value2: "512-GB",
+         price: 330000,
+         stock: 12,
+         imageId: 1,
+         text: "Silver 512 GB"
+      },
+      {
+         productId: 21,
+         value1: "gold",
+         value2: "256-GB",
+         price: 330000,
+         stock: 7,
+         imageId: 1,
+         text: "Gold 256 GB"
+      },
+      {
+         productId: 22,
+         value1: "gold",
+         value2: "512-GB",
+         price: 330000,
+         stock: 21,
+         imageId: 1,
+         text: "Gold 512 GB"
+      }
+   ]
 },
 {
    id: 6,
@@ -345,6 +409,7 @@ export const products = [{
       url: "https://www.macstation.com.ar/img/productos/2895-1.jpg"
    }],
    stock: 6,
+   stockSimple: 15,
    categories: "iPad",
    categoriesIds: 3,
    description: "El iPad mini se diseñó meticulosamente para tener una belleza extraordinaria: con una pantalla de borde a borde, marcos más delgados y esquinas elegantemente redondeadas.",

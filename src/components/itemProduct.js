@@ -34,7 +34,7 @@ const ItemProduct = ({product}) => {
                         <span className="fw-bold item-price fs-4">${new Intl.NumberFormat('es-AR').format(price)}</span>
                     </div>
                     {/* //El seeMore true es para mostrar el boton Ver más (icono de ojo) */}
-                    <ItemCount stock={stock} name={name} productLink={productLink} addToCart={addToCart} buttonAddToCart="false" seeMore="true"/>
+                    <ItemCount stock={stock} name={name} productLink={productLink} addToCart={addToCart} quantity={false}  buttonAddToCart={false} seeMore={true}/>
                 </div>
             </div>
         </>        

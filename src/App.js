@@ -6,20 +6,13 @@ import Home from './components/home';
 import ItemListContainer from './components/itemListContainer';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ItemDetailContainer from './components/itemDetailContainer';
-import { CartContext } from './context/cartContext';
+import { CartProvider } from './context/cartContext';
+import Cart from './components/cart';
  
 function App() {
-  const [cart, setCart] = useState([])
-  
-  const addToCart = (item) => {
-    setCart([...cart, item])
-  }
 
   return (
-    <CartContext.Provider value={{
-      cart,
-      addToCart
-    }}>
+    <CartProvider>
       <BrowserRouter>
         <Header />
         <Routes>
@@ -28,10 +21,11 @@ function App() {
           <Route path="/categoria/:categorySlug" element={ <ItemListContainer /> }/>
           <Route path="*" element={ <Navigate to="/"/> }/>
           <Route path="/producto/:itemSlug" element={ <ItemDetailContainer/> }/>
+          <Route path="/cart" element={<Cart/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
-    </CartContext.Provider>
+    </CartProvider>
   )
 }
 
