@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 const CartWidget = () => {
-    const { cart, removeItem, itemsQuantity } = useContext(CartContext);
+    const { cart, removeItem, removeAllItems, itemsQuantity } = useContext(CartContext);
 
 
         return (
@@ -56,7 +56,9 @@ const CartWidget = () => {
                         }
                     </div>
                     {cart.length > 0 ?
-                    <div className='p-3'><Link to="/cart" className="btn btn-primary w-100">Terminar compra</Link>
+                    <div className='p-3 d-flex'>
+                        <button onClick={removeAllItems} className="btn btn-secondary w-100 me-2">Vaciar carrito</button>
+                        <Link to="/cart" className="btn btn-primary w-100">Terminar compra</Link>
                     </div>
                     : null}
                 </div>

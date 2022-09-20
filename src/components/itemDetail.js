@@ -74,38 +74,29 @@ const ItemDetail = ({item}) => {
 
     
     const handleAddToCart = () => {
+
+        let simpleOrVariant;
         
         if (hasVariants){
-            const itemToCart = {
-                id: variantSelected.productId,
-                name: item.name,
-                price: variantSelected.price,
-                option1: option1,
-                option2: option2,
-                quantity: counter,
-                image: item.featuredImage
-            }
-            addToCart(itemToCart);
-            console.log(itemToCart);
-            console.log(cart);
-            console.log(isInCart(variantSelected.productId));
-
+            simpleOrVariant = variantSelected;
         } else{
-
-            const itemToCart = {
-                id: item.id,
-                name: item.name,
-                price: item.price,
-                option1: option1,
-                option2: option2,
-                quantity: counter,
-                image: item.featuredImage
-            }
-            addToCart(itemToCart);
-            console.log(itemToCart);
-            console.log(cart);
-            console.log(isInCart(item.id));
+            simpleOrVariant = item;
         }
+        
+        const itemToCart = {
+            id: simpleOrVariant.productId,
+            name: item.name,
+            price: simpleOrVariant.price,
+            option1: option1,
+            option2: option2,
+            quantity: counter,
+            image: item.featuredImage
+        }
+        addToCart(itemToCart);
+        console.log(itemToCart);
+        console.log(cart);
+        console.log(isInCart(simpleOrVariant.productId));
+
     }
 
     return (
