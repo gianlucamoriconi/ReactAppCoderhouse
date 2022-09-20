@@ -163,7 +163,35 @@ export const products = [{
          stock: 10,
          imageId: 1,
          text: "Gold 512 GB"
+      },
+      {
+         productId: 13,
+         value1: "128-GB",
+         value2: "white",
+         price: 710900,
+         stock: 10,
+         imageId: 1,
+         text: "White (blanco) 128 GB"
+      },
+      {
+         productId: 14,
+         value1: "256-GB",
+         value2: "white",
+         price: 710900,
+         stock: 10,
+         imageId: 1,
+         text: "White (blanco) 256 GB"
+      },
+      {
+         productId: 15,
+         value1: "512-GB",
+         value2: "white",
+         price: 710900,
+         stock: 10,
+         imageId: 1,
+         text: "White (blanco) 512 GB"
       }
+
    ]
 },
 {
@@ -258,7 +286,7 @@ export const products = [{
    value2: null,
    variants:[
       {
-         productId: 13,
+         productId: 16,
          value1: "medianoche",
          value2: null,
          price: 75000,
@@ -267,7 +295,7 @@ export const products = [{
          text: "Medianoche"
       },
       {
-         productId: 14,
+         productId: 17,
          value1: "plateado-y-correa-blanca",
          value2: null,
          price: 75000,
@@ -276,7 +304,7 @@ export const products = [{
          text: "Plateado y correa blanca"
       },
       {
-         productId: 15,
+         productId: 18,
          value1: "verde",
          value2: null,
          price: 75000,
@@ -285,7 +313,7 @@ export const products = [{
          text: "Verde"
       },
       {
-         productId: 16,
+         productId: 19,
          value1: "rojo",
          value2: null,
          price: 75000,
@@ -343,7 +371,7 @@ export const products = [{
    }],
    variants: [
       {
-         productId: 17,
+         productId: 20,
          value1: "space-gray",
          value2: "256-GB",
          price: 330000,
@@ -352,7 +380,7 @@ export const products = [{
          text: "Space Gray 256 GB"
       },
       {
-         productId: 18,
+         productId: 21,
          value1: "space-gray",
          value2: "512-GB",
          price: 330000,
@@ -361,7 +389,7 @@ export const products = [{
          text: "Space Gray 512 GB"
       },
       {
-         productId: 19,
+         productId: 22,
          value1: "silver",
          value2: "256-GB",
          price: 330000,
@@ -370,7 +398,7 @@ export const products = [{
          text: "Silver 256 GB"
       },
       {
-         productId: 20,
+         productId: 23,
          value1: "silver",
          value2: "512-GB",
          price: 330000,
@@ -379,7 +407,7 @@ export const products = [{
          text: "Silver 512 GB"
       },
       {
-         productId: 21,
+         productId: 24,
          value1: "gold",
          value2: "256-GB",
          price: 330000,
@@ -388,7 +416,7 @@ export const products = [{
          text: "Gold 256 GB"
       },
       {
-         productId: 22,
+         productId: 25,
          value1: "gold",
          value2: "512-GB",
          price: 330000,

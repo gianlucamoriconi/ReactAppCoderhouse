@@ -12,6 +12,20 @@ const ItemDetail = ({item}) => {
     const [option1, setOption1] = useState(null);
     const [option2, setOption2] = useState(null);
     const [counter, setCounter] = useState(1);
+    const [variantSelected, setVariantSelected] = useState();
+
+    console.log(variantSelected);
+
+    //Verificamos si tiene variantes
+    let hasVariants = false;
+
+    if (variants !== null && variants !== undefined) {
+        console.log("Tiene variantes");
+        hasVariants = true;
+    } else {
+        console.log("No tiene variantes");
+        hasVariants = false;
+    }
 
     /*Si tiene variantes o no*/
     useEffect( () => {
@@ -24,34 +38,74 @@ const ItemDetail = ({item}) => {
         if (value2 !== null){
             setOption2(document.querySelector("select#propiedad-2").value);
         }
+
+        //Si tiene variantes, identificamos el ID de la variante seleccionada
+        if (hasVariants === true){
+
+            let value1Selected = null;
+            let value2Selected = null;
+
+            if (value1 !== null && value2 === null){
+                value1Selected = document.querySelector("select#propiedad-1").value;
+            }
+
+            if (value1 !== null && value2 !== null){
+                value1Selected = document.querySelector("select#propiedad-1").value;
+                value2Selected = document.querySelector("select#propiedad-2").value;
+            }
+
+            variants.map((variant) => {
+                
+                if (value1 !== null && value2 === null){
+                    if (Object.values(variant).indexOf(value1Selected) > -1){
+                        setVariantSelected(variant);
+                    }
+                }
+
+                if (value1 !== null && value2 !== null){
+                    if ((Object.values(variant).indexOf(value1Selected) > -1) && (Object.values(variant).indexOf(value2Selected) > -1) ){
+                        setVariantSelected(variant);
+                    }
+                }
+            });
+        }
+
     }, [option1, option2])
-
-  
-
-    let hasVariants = false;
-
-    if (property1 !== null){
-        hasVariants = true;
-    } else{
-        hasVariants = false;
-    }
 
     
     const handleAddToCart = () => {
+        
+        if (hasVariants){
+            const itemToCart = {
+                id: variantSelected.productId,
+                name: item.name,
+                price: variantSelected.price,
+                option1: option1,
+                option2: option2,
+                quantity: counter,
+                image: item.featuredImage
+            }
+            addToCart(itemToCart);
+            console.log(itemToCart);
+            console.log(cart);
+            console.log(isInCart(variantSelected.productId));
 
-        const itemToCart = {
-            id: item.id,
-            name: item.name,
-            price: item.price,
-            option1: option1,
-            option2: option2,
-            quantity: counter,
-            image: item.featuredImage
+        } else{
+
+            const itemToCart = {
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                option1: option1,
+                option2: option2,
+                quantity: counter,
+                image: item.featuredImage
+            }
+            addToCart(itemToCart);
+            console.log(itemToCart);
+            console.log(cart);
+            console.log(isInCart(item.id));
         }
-        addToCart(itemToCart);
-        console.log(itemToCart);
-        console.log(cart);
-        console.log(isInCart(item.id));
     }
 
     return (
@@ -69,7 +123,7 @@ const ItemDetail = ({item}) => {
                         <Variants property1={property1} value1={value1} property2={property2} value2={value2} setOption1={setOption1} setOption2={setOption2}/>
                     : null}
                     <div className="max-width-200 mb-5">
-                        <ItemCount item={item} handleAddToCart={handleAddToCart} setCounter={setCounter} stockSimple={stockSimple} counter={counter} quantity={true} buttonAddToCart={true}/>
+                        <ItemCount hasVariants={hasVariants ? true : false} item={item} handleAddToCart={handleAddToCart} setCounter={setCounter} stockSimple={stockSimple} counter={counter} quantity={true} buttonAddToCart={true}/>
                         {
                             isInCart(item.id) ?
                             <Link to="/cart" className="btn mt-3 btn-secondary">Ver carrito</Link>

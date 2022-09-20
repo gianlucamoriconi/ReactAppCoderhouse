@@ -34,6 +34,17 @@ const CartWidget = () => {
                                     <h3 className='item-name-cart'>{item.name}</h3>
                                     <p className='item-info-cart item-price-cart'>${new Intl.NumberFormat('es-AR').format(item.price)}</p>
                                     <p className='item-info-cart item-quantity-cart'>Cantidad: {item.quantity}</p>
+                                    {item.option1 !== null || item.option2 !== null ? 
+                                    <div className="variants item-quantity-cart">
+                                        <p> Variante:
+                                        {item.option1 !== null ?
+                                        <span> {item.option1}</span>
+                                        : null}
+                                        {item.option2 !== null ?
+                                        <span> {item.option2}</span>
+                                        : null}
+                                        </p>
+                                    </div>:null}
                                 </div>
                                 <div className='col-2 item-cart-col-button text-center'>
                                     <button onClick={() => removeItem(item.id)} className="trash"><IoMdTrash/></button>
