@@ -92,10 +92,7 @@ const ItemDetail = ({item}) => {
             quantity: counter,
             image: item.featuredImage
         }
-        addToCart(itemToCart);
-        console.log(itemToCart);
-        console.log(cart);
-        console.log(isInCart(simpleOrVariant.productId));
+        addToCart(itemToCart, counter);
 
     }
 
