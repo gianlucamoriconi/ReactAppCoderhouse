@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import ItemList from "./itemList"
 import Ellipsis from "./ellipsis";
-import { dataCategories } from '../helpers/categories.js';
+// import { dataCategories } from '../helpers/categories.js';
 import { useParams } from 'react-router-dom';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config"; 
@@ -14,15 +14,27 @@ const ItemListContainer = (props) => {
     const [categoryImage, setCategoryImage] = useState("https://media.idownloadblog.com/wp-content/uploads/2019/09/Apple-Innovation-Event-banner.jpg");
     const { categorySlug } = useParams();
     
+    let categoriesDB;
 
     let backgroundImage = {
         backgroundImage: 'url(' + categoryImage + ')',
         height: '200px',
         backgroundSize: "cover",
         backgroundPosition: "center"
-      };
-    let categoryWithSlug = dataCategories.filter(cat => cat.slug === categorySlug);
-    categoryWithSlug = categoryWithSlug[0];
+    };
+
+
+    const categoriesRef = collection(db, 'categories')
+    getDocs(categoriesRef)
+        .then((category) => {
+            categoriesDB = category.docs.map( (doc) => doc.data() )
+
+        })
+
+        .catch( (error) =>{
+            console.log(error);
+        })
+
 
 
     useEffect(() => {
@@ -33,6 +45,10 @@ const ItemListContainer = (props) => {
         getDocs(productosRef)
             .then((prod) => {
                 const productsDB = prod.docs.map( (doc) => doc.data() )
+                let categoryWithSlug = categoriesDB.filter(cat => cat.slug === categorySlug);
+                categoryWithSlug = categoryWithSlug[0];
+    
+
 
                 if (!categorySlug){
                     setProducts(productsDB);
