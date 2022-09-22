@@ -7,23 +7,19 @@ import { CartContext } from "../context/cartContext";
 
 const ItemDetail = ({item}) => {
     
-    const { cart, addToCart, isInCart } = useContext(CartContext);
+    const { addToCart, isInCart } = useContext(CartContext);
     const {name, price, stockSimple, featuredImage, images, description, property1, value1, property2, value2, variants} = item;
     const [option1, setOption1] = useState(null);
     const [option2, setOption2] = useState(null);
     const [counter, setCounter] = useState(1);
     const [variantSelected, setVariantSelected] = useState();
 
-    console.log(variantSelected);
-
     //Verificamos si tiene variantes
-    let hasVariants = false;
+    let hasVariants;
 
     if (variants !== null && variants !== undefined) {
-        console.log("Tiene variantes");
         hasVariants = true;
     } else {
-        console.log("No tiene variantes");
         hasVariants = false;
     }
 
@@ -42,15 +38,14 @@ const ItemDetail = ({item}) => {
         //Si tiene variantes, identificamos el ID de la variante seleccionada
         if (hasVariants === true){
 
-            let value1Selected = null;
-            let value2Selected = null;
+            let value1Selected;
+            let value2Selected;
 
-            if (value1 !== null && value2 === null){
+            if (value1 !== null){
                 value1Selected = document.querySelector("select#propiedad-1").value;
             }
 
-            if (value1 !== null && value2 !== null){
-                value1Selected = document.querySelector("select#propiedad-1").value;
+            if (value2 !== null){
                 value2Selected = document.querySelector("select#propiedad-2").value;
             }
 

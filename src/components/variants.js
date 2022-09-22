@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import OptionVariant from "./optionVariant";
 import Select from "./select";
 
 const Variants = ({property1, value1, property2, value2, setOption1, setOption2}) => {

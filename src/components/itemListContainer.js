@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 import ItemList from "./itemList"
 import Ellipsis from "./ellipsis";
-import { getProducts } from '../helpers/getProducts.js';
 import { dataCategories } from '../helpers/categories.js';
-import { useParams } from 'react-router-dom'; 
+import { useParams } from 'react-router-dom';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/config"; 
 
 
 const ItemListContainer = (props) => {
@@ -28,10 +29,13 @@ const ItemListContainer = (props) => {
         setLoading(true)
         setCategoryTitle("");
 
-        getProducts()
-            .then( (prod) =>{
+        const productosRef = collection(db, 'products')
+        getDocs(productosRef)
+            .then((prod) => {
+                const productsDB = prod.docs.map( (doc) => doc.data() )
+
                 if (!categorySlug){
-                    setProducts(prod);
+                    setProducts(productsDB);
                     setCategoryTitle("Todos los productos");
                     setCategoryImage("https://media.idownloadblog.com/wp-content/uploads/2019/09/Apple-Innovation-Event-banner.jpg");
 
@@ -39,11 +43,10 @@ const ItemListContainer = (props) => {
                     let idCat = categoryWithSlug.categoryId;
                     setCategoryTitle(categoryWithSlug.categoryName)
                     setCategoryImage(categoryWithSlug.categoryImage)
-                    prod.filter((prodFilter) => prodFilter.categoriesIds === idCat)
+                    productsDB.filter((prodFilter) => prodFilter.categoriesIds === idCat)
                     
-                    setProducts( prod.filter((prodFilter) => prodFilter.categoriesIds === idCat ))
+                    setProducts( productsDB.filter((prodFilter) => prodFilter.categoriesIds === idCat ))
                 }
-                
             })
 
             .catch( (error) =>{
@@ -52,6 +55,7 @@ const ItemListContainer = (props) => {
             .finally( ()=> {
                 setLoading(false);
             })
+
     }, [categorySlug])
 
     return (

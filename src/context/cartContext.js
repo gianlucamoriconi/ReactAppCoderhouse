@@ -13,7 +13,7 @@ export const CartProvider = ({children}) => {
             itemInCart.quantity = itemInCart.quantity + counter
             setCart([...cart]); 
           }
-      });
+        });
 
       } else{
         setCart([...cart, item])

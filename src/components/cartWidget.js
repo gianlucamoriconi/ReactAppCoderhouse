@@ -24,8 +24,8 @@ const CartWidget = () => {
                         {cart.length < 1 ? <div>
                             Aquí estarán los productos que llevas comprando
                         </div>:
-                        cart.map((item) => (
-                            <div key={item.id}>
+                        cart.map((item, i) => (
+                            <div key={i}>
                             <div className="d-flex">
                                 <div className="col-3 item-cart-col-img">
                                     <img className="w-100" src={item.image}/>

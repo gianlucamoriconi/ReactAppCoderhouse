@@ -6,7 +6,7 @@ const ImagesInDetail = ({images, featuredImage}) => {
             <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     {images.map((image, i) => {
-                        return <div key={image.id} className={i === 0 ? "carousel-item active" : "carousel-item" }data-bs-interval="10000"><img className="w-100" src={image.url} alt={"product"}></img></div>
+                        return <div key={i} className={i === 0 ? "carousel-item active" : "carousel-item" }data-bs-interval="10000"><img className="w-100" src={image} alt={"product"}></img></div>
                     })}
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
                         <span className="carousel-control-prev-icon" aria-hidden="true"></span>

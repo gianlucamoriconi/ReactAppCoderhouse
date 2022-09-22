@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CartContext } from "../context/cartContext";
 import { Link } from 'react-router-dom';
 import { IoMdTrash } from 'react-icons/io';
@@ -8,14 +8,16 @@ import { IoMdTrash } from 'react-icons/io';
 const Cart = () => {
 
     const { cart, removeItem, removeAllItems } = useContext(CartContext);
-    console.log(cart);
 
     return (
         <div id="cart-page">
             <div className="container">
                 <div className="p-4 mb-3"><h1 className="pb-4 text-center">Carrito</h1>
                     <div className="p-5">
-                        {cart.length < 1 ? <div className="w-100 h-80 p-2 text-center">
+                      
+                        {cart.length < 1 ?
+                        
+                        <div className="w-100 h-80 p-2 text-center">
 
                             <div>
                                 <p className="mb-0">Acá se visualizan los productos previo a iniciar la compra.</p>
@@ -23,7 +25,9 @@ const Cart = () => {
                                 <Link className="" to="/todos-los-productos">Ver todos los productos</Link>
                             </div>
                         </div>
+                        
                         :
+                        
                         cart.map((item) => (
                             <div key={item.id} className="p-4">
                                 <div key={item.id} className="d-flex">
@@ -53,7 +57,9 @@ const Cart = () => {
                                 <hr/>
                             </div>
                         ))}
-                    {cart.length > 0 ?<div className='p-3'>
+                  
+                    {cart.length > 0 ?
+                    <div className='p-3'>
                         <Link to="/todos-los-productos" className="btn btn-secondary me-3">Seguir comprando</Link>
                         <button onClick={removeAllItems} className="btn btn-secondary me-3">Vaciar carrito</button>
                         <Link to="/checkout" className="btn btn-primary">Finalizar compra</Link>

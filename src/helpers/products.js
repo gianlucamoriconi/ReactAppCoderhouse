@@ -299,7 +299,7 @@ export const products = [{
          value1: "plateado-y-correa-blanca",
          value2: null,
          price: 75000,
-         stock: 10,
+         stock: 8,
          imageId: 1,
          text: "Plateado y correa blanca"
       },

@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
 import Ellipsis from "./ellipsis";
 import ItemDetail from "./itemDetail";
-import { getProducts } from '../helpers/getProducts.js';
+// import { getProducts } from '../helpers/getProducts.js';
 import { useParams } from 'react-router-dom'; 
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase/config"; 
 
 
 const ItemDetailContainer = (props) => {
@@ -12,9 +14,12 @@ const ItemDetailContainer = (props) => {
  
     useEffect(() => {
         setLoading(true)
-        getProducts()
-            .then( (res) =>{
-                setItem( res.find((prod) => prod.slug === itemSlug))
+
+        const productosRef = collection(db, 'products')
+        getDocs(productosRef)
+            .then((resp) => {
+                const productsDB = resp.docs.map( (doc) => doc.data() )
+                setItem( productsDB.find((prod) => prod.slug === itemSlug))
             })
 
             .catch( (error) =>{
