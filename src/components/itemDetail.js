@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import ImagesInDetail from "./imagesInDetail";
 import Variants from "./variants";
 import { CartContext } from "../context/cartContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ItemDetail = ({item}) => {
     
@@ -122,7 +124,7 @@ const ItemDetail = ({item}) => {
                 </div>
             </div>
             
-           
+            <ToastContainer />
         </div>    
     )
 }

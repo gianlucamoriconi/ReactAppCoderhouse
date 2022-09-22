@@ -1,4 +1,7 @@
 import { createContext, useState } from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const CartContext = createContext()
 
@@ -12,11 +15,14 @@ export const CartProvider = ({children}) => {
           if (itemInCart.id === item.id){
             itemInCart.quantity = itemInCart.quantity + counter
             setCart([...cart]); 
+            itemAddedNotify(item.name, counter);
           }
         });
 
       } else{
         setCart([...cart, item])
+        itemAddedNotify(item.name, counter);
+        
       }
     }
     
@@ -31,6 +37,19 @@ export const CartProvider = ({children}) => {
     const isInCart = (id) => {
       return cart.some((item) => item.id === id)
     }
+
+    function itemAddedNotify(product, counter){
+      toast.success(`Agregaste ${counter} "${product}" al carrito`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+    }
+
     
     return (
         <CartContext.Provider value={{
