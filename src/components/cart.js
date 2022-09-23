@@ -7,7 +7,7 @@ import { IoMdTrash } from 'react-icons/io';
 
 const Cart = () => {
 
-    const { cart, removeItem, removeAllItems } = useContext(CartContext);
+    const { cart, removeItem, removeAllItems, totalAmountInCart } = useContext(CartContext);
 
     return (
         <div id="cart-page">
@@ -59,11 +59,19 @@ const Cart = () => {
                         ))}
                   
                     {cart.length > 0 ?
-                    <div className='p-3'>
-                        <Link to="/todos-los-productos" className="btn btn-secondary me-3">Seguir comprando</Link>
-                        <button onClick={removeAllItems} className="btn btn-secondary me-3">Vaciar carrito</button>
-                        <Link to="/checkout" className="btn btn-primary">Finalizar compra</Link>
+
+                    <div className='w-100 d-flex p-3 flex-wrap'>
+                        <div className='p-3 d-flex w-100'>
+                            <h4 className='text-end w-100'>Total: ${new Intl.NumberFormat('es-AR').format(totalAmountInCart())}</h4>
+                            <hr/>
+                        </div>
+                        <div className='p-3 d-flex w-100'>
+                            <Link to="/todos-los-productos" className="btn btn-secondary me-3">Seguir comprando</Link>
+                            <button onClick={removeAllItems} className="btn btn-secondary me-3">Vaciar carrito</button>
+                            <Link to="/checkout" className="btn btn-primary">Finalizar compra</Link>
+                        </div>
                     </div>
+
                     : null}
                     </div>
                 </div>

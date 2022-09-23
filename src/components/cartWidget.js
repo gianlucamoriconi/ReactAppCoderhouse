@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 const CartWidget = () => {
-    const { cart, removeItem, removeAllItems, itemsQuantity } = useContext(CartContext);
+    const { cart, removeItem, removeAllItems, itemsQuantity, totalAmountInCart } = useContext(CartContext);
 
 
         return (
@@ -56,9 +56,15 @@ const CartWidget = () => {
                         }
                     </div>
                     {cart.length > 0 ?
-                    <div className='p-3 d-flex'>
-                        <button onClick={removeAllItems} className="btn btn-secondary w-100 me-2">Vaciar carrito</button>
-                        <Link to="/cart" className="btn btn-primary w-100">Terminar compra</Link>
+                    <div className='w-100 d-flex p-3 flex-wrap'>
+                        <div className='p-3 d-flex w-100'>
+                            <h4 className='text-end w-100'>Total: ${new Intl.NumberFormat('es-AR').format(totalAmountInCart())}</h4>
+                            <hr/>
+                        </div>
+                        <div className='p-3 d-flex w-100'>
+                            <button onClick={removeAllItems} className="btn btn-secondary w-100 me-2">Vaciar carrito</button>
+                            <Link to="/cart" className="btn btn-primary w-100">Terminar compra</Link>
+                        </div>
                     </div>
                     : null}
                 </div>

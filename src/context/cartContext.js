@@ -49,7 +49,16 @@ export const CartProvider = ({children}) => {
         progress: undefined,
         });
     }
+ 
+    const totalAmountInCart = () => {
+      let totalAmount = 0;
+      cart.forEach((itemInCart) => {
+        console.log(itemInCart.price + " " + itemInCart.quantity);
+        totalAmount = totalAmount + (itemInCart.price * itemInCart.quantity);
+      });
 
+      return totalAmount;
+    }
     
     return (
         <CartContext.Provider value={{
@@ -57,7 +66,8 @@ export const CartProvider = ({children}) => {
             addToCart,
             removeItem,
             removeAllItems,
-            isInCart
+            isInCart,
+            totalAmountInCart
         }}>
           {children}
         </CartContext.Provider>
