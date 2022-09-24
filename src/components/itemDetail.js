@@ -11,57 +11,50 @@ const ItemDetail = ({item}) => {
     
     const { addToCart, isInCart } = useContext(CartContext);
     const {name, price, stockSimple, featuredImage, images, description, property1, value1, property2, value2, variants} = item;
-    const [option1, setOption1] = useState(null);
-    const [option2, setOption2] = useState(null);
+    const [option1, setOption1] = useState(value1);
+    const [option2, setOption2] = useState(value2);
+    const [hasVariants, setHasVariants] = useState(Boolean(variants));
     const [counter, setCounter] = useState(1);
     const [variantSelected, setVariantSelected] = useState();
 
-    //Verificamos si tiene variantes
-    let hasVariants;
-
-    if (variants !== null && variants !== undefined) {
-        hasVariants = true;
-    } else {
-        hasVariants = false;
-    }
 
     /*Si tiene variantes o no*/
     useEffect( () => {
-        //Si tiene valor en propiedad 1, cambiamos el null por el valor de la misma 
-        if (value1 !== null){
-            setOption1(document.querySelector("select#propiedad-1").value);
-        }
-    
-        //Si tiene valor en propiedad 2, cambiamos el null por el valor de la misma 
-        if (value2 !== null){
-            setOption2(document.querySelector("select#propiedad-2").value);
-        }
 
         //Si tiene variantes, identificamos el ID de la variante seleccionada
         if (hasVariants === true){
 
-            let value1Selected;
-            let value2Selected;
 
+            //Si tiene valor en propiedad 1, cambiamos el null por el valor de la misma 
             if (value1 !== null){
-                value1Selected = document.querySelector("select#propiedad-1").value;
+                setOption1(document.querySelector("select#propiedad-1").value);
             }
-
+        
+            //Si tiene valor en propiedad 2, cambiamos el null por el valor de la misma 
             if (value2 !== null){
-                value2Selected = document.querySelector("select#propiedad-2").value;
+                setOption2(document.querySelector("select#propiedad-2").value);
             }
 
             variants.map((variant) => {
                 
-                if (value1 !== null && value2 === null){
-                    if (Object.values(variant).indexOf(value1Selected) > -1){
-                        setVariantSelected(variant);
+                if (option1 !== null && option2 === null){
+
+                    if (option1 !== "needSelect"){
+                        if (Object.values(variant).indexOf(option1) > -1){
+                            setVariantSelected(variant);
+                        }
+                    } else{
+                        setVariantSelected(undefined);
                     }
                 }
 
-                if (value1 !== null && value2 !== null){
-                    if ((Object.values(variant).indexOf(value1Selected) > -1) && (Object.values(variant).indexOf(value2Selected) > -1) ){
-                        setVariantSelected(variant);
+                if (option1 !== null && option2 !== null){
+                    if (option1 !== "needSelect" && option2 !== "needSelect") {
+                        if ((Object.values(variant).indexOf(option1) > -1) && (Object.values(variant).indexOf(option2) > -1) ){
+                            setVariantSelected(variant);
+                        }
+                    } else{
+                        setVariantSelected(undefined);
                     }
                 }
             });
@@ -71,26 +64,37 @@ const ItemDetail = ({item}) => {
 
     
     const handleAddToCart = () => {
-
-        let simpleOrVariant;
-        
+    
         if (hasVariants){
-            simpleOrVariant = variantSelected;
+            if (variantSelected){
+                const itemToCart = {
+                    id: variantSelected.productId,
+                    name: item.name,
+                    price: variantSelected.price,
+                    option1: option1,
+                    option2: option2,
+                    quantity: counter,
+                    image: item.featuredImage
+                }
+                addToCart(itemToCart, counter);
+            } else{
+                alert(`Te falta elegir la variante del ${item.name}` );
+            }
+
         } else{
-            simpleOrVariant = item;
+
+            const itemToCart = {
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                option1: option1,
+                option2: option2,
+                quantity: counter,
+                image: item.featuredImage
+            }
+            addToCart(itemToCart, counter);
         }
         
-        const itemToCart = {
-            id: simpleOrVariant.productId,
-            name: item.name,
-            price: simpleOrVariant.price,
-            option1: option1,
-            option2: option2,
-            quantity: counter,
-            image: item.featuredImage
-        }
-        addToCart(itemToCart, counter);
-
     }
 
     return (

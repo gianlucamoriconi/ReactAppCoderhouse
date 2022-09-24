@@ -8,6 +8,7 @@ import { IoMdTrash } from 'react-icons/io';
 const Cart = () => {
 
     const { cart, removeItem, removeAllItems, totalAmountInCart } = useContext(CartContext);
+    
 
     return (
         <div id="cart-page">

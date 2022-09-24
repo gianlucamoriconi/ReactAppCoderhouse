@@ -72,7 +72,7 @@ export const products = [{
          price: 710900,
          stock: 10,
          imageId: 1,
-         text: "Graphite 256 GB"
+         text: "Silver 128 GB"
       },
       {
          productId: 3,
@@ -81,7 +81,7 @@ export const products = [{
          price: 710900,
          stock: 10,
          imageId: 1,
-         text: "Graphite 512 GB"
+         text: "Sierra Blue 128 GB"
       },
       {
          productId: 4,

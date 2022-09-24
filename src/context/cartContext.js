@@ -30,7 +30,7 @@ export const CartProvider = ({children}) => {
       setCart([...cart.filter((item) => item.id !== id)])
     }
 
-    const removeAllItems = (id) => {
+    const removeAllItems = () => {
       setCart([]);
     }
     
@@ -41,7 +41,7 @@ export const CartProvider = ({children}) => {
     function itemAddedNotify(product, counter){
       toast.success(`Agregaste ${counter} "${product}" al carrito`, {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -53,7 +53,6 @@ export const CartProvider = ({children}) => {
     const totalAmountInCart = () => {
       let totalAmount = 0;
       cart.forEach((itemInCart) => {
-        console.log(itemInCart.price + " " + itemInCart.quantity);
         totalAmount = totalAmount + (itemInCart.price * itemInCart.quantity);
       });
 
