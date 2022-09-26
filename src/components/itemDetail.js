@@ -9,18 +9,61 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ItemDetail = ({item}) => {
     
-    const { addToCart, isInCart } = useContext(CartContext);
+    const { addToCart, isInCart, cart } = useContext(CartContext);
     const {name, price, stockSimple, featuredImage, images, description, property1, value1, property2, value2, variants} = item;
     const [option1, setOption1] = useState(value1);
     const [option2, setOption2] = useState(value2);
-    const [hasVariants, setHasVariants] = useState(Boolean(variants));
+    const hasVariants = Boolean(variants);
     const [counter, setCounter] = useState(1);
     const [variantSelected, setVariantSelected] = useState();
+    const [stock, setStock] = useState(Boolean(variants) === false ? item.stock : undefined);
+
+    if (stock === undefined){
+        console.log("Stock es undefined");
+    } else{
+        console.log("Stock es otra cosa");
+    }
+
+    //Calcula el stock que queda del item teniendo en cuenta lo agregado al carrito
+    function calculateStockWithCartContext(product){
+        if (cart.length > 0){
+
+            if (hasVariants) {
+                if (isInCart(product.productId) === true){
+                    console.log("Cart has products and is in cart");
+                    cart.map((itemInCart) => {
+                        if (itemInCart.id === product.productId){
+                            let newStock = product.stock - itemInCart.quantity;
+                            console.log("nuevo stock de variante " + newStock);
+                            setStock(newStock);
+                        }
+                    });
+                } else{
+                    setStock(product.stock);
+                }
+            } else {
+                if (isInCart(product.id) === true){
+                    console.log("Cart has products and is in cart");
+                    cart.map((itemInCart) => {
+                        if (itemInCart.id === product.id){
+                            let newStock = product.stock - itemInCart.quantity;
+                            console.log("nuevo stock producto Simple " + newStock);
+                            setStock(newStock);
+                        }
+                    });
+                } else{
+                    setStock(product.stock);
+                }
+            }
+        } else {
+            setStock(product.stock);
+        }
+    }
 
 
     /*Si tiene variantes o no*/
     useEffect( () => {
-
+        
         //Si tiene variantes, identificamos el ID de la variante seleccionada
         if (hasVariants === true){
 
@@ -37,11 +80,13 @@ const ItemDetail = ({item}) => {
 
             variants.map((variant) => {
                 
+                
                 if (option1 !== null && option2 === null){
 
                     if (option1 !== "needSelect"){
                         if (Object.values(variant).indexOf(option1) > -1){
                             setVariantSelected(variant);
+                            calculateStockWithCartContext(variant)
                         }
                     } else{
                         setVariantSelected(undefined);
@@ -52,15 +97,21 @@ const ItemDetail = ({item}) => {
                     if (option1 !== "needSelect" && option2 !== "needSelect") {
                         if ((Object.values(variant).indexOf(option1) > -1) && (Object.values(variant).indexOf(option2) > -1) ){
                             setVariantSelected(variant);
+                            calculateStockWithCartContext(variant);
                         }
                     } else{
                         setVariantSelected(undefined);
                     }
                 }
             });
+        } else{
+            setStock(stock);
+            calculateStockWithCartContext(item);
         }
 
-    }, [option1, option2])
+    }, [option1, option2, stock, cart])
+
+    //option1 y option 2 podría reemplazarse por una escucha al cambio de variante
 
     
     const handleAddToCart = () => {
@@ -74,7 +125,8 @@ const ItemDetail = ({item}) => {
                     option1: option1,
                     option2: option2,
                     quantity: counter,
-                    image: item.featuredImage
+                    image: item.featuredImage,
+                    text: variantSelected.text
                 }
                 addToCart(itemToCart, counter);
             } else{
@@ -90,7 +142,9 @@ const ItemDetail = ({item}) => {
                 option1: option1,
                 option2: option2,
                 quantity: counter,
-                image: item.featuredImage
+                image: item.featuredImage,
+                text: item.text
+
             }
             addToCart(itemToCart, counter);
         }
@@ -112,7 +166,7 @@ const ItemDetail = ({item}) => {
                         <Variants property1={property1} value1={value1} property2={property2} value2={value2} setOption1={setOption1} setOption2={setOption2}/>
                     : null}
                     <div className="max-width-200 mb-5">
-                        <ItemCount hasVariants={hasVariants ? true : false} item={item} handleAddToCart={handleAddToCart} setCounter={setCounter} stockSimple={stockSimple} counter={counter} quantity={true} buttonAddToCart={true}/>
+                        <ItemCount hasVariants={hasVariants ? true : false} item={item} handleAddToCart={handleAddToCart} setCounter={setCounter} stock={stock} counter={counter} quantity={true} buttonAddToCart={true}/>
                         {
                             isInCart(item.id) ?
                             <Link to="/cart" className="btn mt-3 btn-secondary">Ver carrito</Link>

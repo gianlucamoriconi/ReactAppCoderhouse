@@ -37,12 +37,9 @@ const CartWidget = () => {
                                     {item.option1 !== null || item.option2 !== null ? 
                                     <div className="variants item-quantity-cart">
                                         <p> Variante:
-                                        {item.option1 !== null ?
-                                        <span> {item.option1}</span>
-                                        : null}
-                                        {item.option2 !== null ?
-                                        <span> {item.option2}</span>
-                                        : null}
+                                        {item.text !== null ?
+                                        <span> {item.text}</span>
+                                        :null}
                                         </p>
                                     </div>:null}
                                 </div>

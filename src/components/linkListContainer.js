@@ -2,7 +2,6 @@
 import { NavLink } from 'react-router-dom';
 import { dataCategories } from '../helpers/categories.js';
 
-
 const LinkListContainer = () => {
      
     return (

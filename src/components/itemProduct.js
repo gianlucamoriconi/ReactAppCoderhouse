@@ -24,11 +24,11 @@ const ItemProduct = ({product}) => {
                 </Link>
                 </div>
                 <div className= "item-info p-3">
-                    <div className="item-name">
+                    <div className="item-info">
                         <div className="mb-3">
-                        <Link to={categoryLink} className="mb-3 fw-light opacity-75 text-decoration-none "><p>{categories}</p></Link>
+                        <Link to={categoryLink} className="mb-3 fw-light opacity-75 text-decoration-none item-category"><p>{categories}</p></Link>
                         </div>
-                        <Link to={productLink} className="text-decoration-none "><h4>{name}</h4></Link>
+                        <Link to={productLink} className="text-decoration-none"><h4 className="item-name">{name}</h4></Link>
                     </div>
                     <div className="item-price-container mb-4">
                         <span className="fw-bold item-price fs-4">${new Intl.NumberFormat('es-AR').format(price)}</span>
