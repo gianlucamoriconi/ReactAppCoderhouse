@@ -3,7 +3,7 @@ import ItemList from "./itemList"
 import Ellipsis from "./ellipsis";
 // import { dataCategories } from '../helpers/categories.js';
 import { useParams } from 'react-router-dom';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/config"; 
 
 
@@ -14,7 +14,6 @@ const ItemListContainer = (props) => {
     const [categoryImage, setCategoryImage] = useState("https://media.idownloadblog.com/wp-content/uploads/2019/09/Apple-Innovation-Event-banner.jpg");
     const { categorySlug } = useParams();
     
-    let categoriesDB;
 
     let backgroundImage = {
         backgroundImage: 'url(' + categoryImage + ')',
@@ -23,54 +22,55 @@ const ItemListContainer = (props) => {
         backgroundPosition: "center"
     };
 
-
-    const categoriesRef = collection(db, 'categories')
-    getDocs(categoriesRef)
-        .then((category) => {
-            categoriesDB = category.docs.map( (doc) => doc.data() )
-
-        })
-
-        .catch( (error) =>{
-            console.log(error);
-        })
-
-
-
     useEffect(() => {
         setLoading(true)
         setCategoryTitle("");
 
-        const productosRef = collection(db, 'products')
-        getDocs(productosRef)
-            .then((prod) => {
-                const productsDB = prod.docs.map( (doc) => doc.data() )
-                let categoryWithSlug = categoriesDB.filter(cat => cat.slug === categorySlug);
-                categoryWithSlug = categoryWithSlug[0];
+        const categoriesRef = collection(db, 'categories');
+        const qCat = categorySlug ? query(categoriesRef, where('slug', '==', categorySlug)) : categoriesRef;
+        let category;
     
+        getDocs(qCat)
+            .then((cat) => {
+                const categoriesDB = cat.docs.map( (doc) => doc.data() )
+                category = categoriesDB[0];
 
-
-                if (!categorySlug){
-                    setProducts(productsDB);
-                    setCategoryTitle("Todos los productos");
-                    setCategoryImage("https://media.idownloadblog.com/wp-content/uploads/2019/09/Apple-Innovation-Event-banner.jpg");
-
-                } else {
-                    let idCat = categoryWithSlug.categoryId;
-                    setCategoryTitle(categoryWithSlug.categoryName)
-                    setCategoryImage(categoryWithSlug.categoryImage)
-                    productsDB.filter((prodFilter) => prodFilter.categoriesIds === idCat)
-                    
-                    setProducts( productsDB.filter((prodFilter) => prodFilter.categoriesIds === idCat ))
-                }
+                const productosRef = collection(db, 'products')
+                const q = categorySlug ? query(productosRef, where('categoriesIds', '==', category.categoryId)) : productosRef;
+        
+                getDocs(q)
+                    .then((prod) => {
+                        const productsDB = prod.docs.map( (doc) => ({ id: doc.id, ... doc.data() }) )
+                        setProducts(productsDB);
+        
+                        if (!categorySlug){
+                            setCategoryTitle("Todos los productos");
+                            setCategoryImage("https://media.idownloadblog.com/wp-content/uploads/2019/09/Apple-Innovation-Event-banner.jpg");
+        
+                        } else {
+        
+                            setCategoryTitle(category.categoryName)
+                            setCategoryImage(category.categoryImage)
+                            // productsDB.filter((prodFilter) => prodFilter.categoriesIds === idCat)
+                            
+                            // setProducts( productsDB.filter((prodFilter) => prodFilter.categoriesIds === idCat ))
+                        }
+                    })
+        
+                    .catch( (error) =>{
+                        console.log(error);
+                    })
+                    .finally( ()=> {
+                        setLoading(false);
+                    })
+    
             })
-
+    
             .catch( (error) =>{
                 console.log(error);
             })
-            .finally( ()=> {
-                setLoading(false);
-            })
+
+        console.log(category);
 
     }, [categorySlug])
 

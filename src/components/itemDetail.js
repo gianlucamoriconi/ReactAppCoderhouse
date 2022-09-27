@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const ItemDetail = ({item}) => {
     
     const { addToCart, isInCart, cart } = useContext(CartContext);
-    const {name, price, stockSimple, featuredImage, images, description, property1, value1, property2, value2, variants} = item;
+    const {name, price, featuredImage, images, description, property1, value1, property2, value2, variants} = item;
     const [option1, setOption1] = useState(value1);
     const [option2, setOption2] = useState(value2);
     const hasVariants = Boolean(variants);

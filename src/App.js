@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ItemDetailContainer from './components/itemDetailContainer';
 import { CartProvider } from './context/cartContext';
 import Cart from './components/cart';
+import Checkout from './components/checkout';
  
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="*" element={ <Navigate to="/"/> }/>
           <Route path="/producto/:itemSlug" element={ <ItemDetailContainer/> }/>
           <Route path="/cart" element={<Cart/>}/>
+          <Route path="/checkout" element={<Checkout/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
