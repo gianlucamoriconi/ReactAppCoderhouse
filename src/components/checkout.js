@@ -9,18 +9,30 @@ import Form from 'react-bootstrap/Form';
 
 const Checkout = () => {
 
-    const { cart, removeItem, removeAllItems, totalAmountInCart } = useContext(CartContext);
+    const { cart = {}, removeItem, removeAllItems, totalAmountInCart } = useContext(CartContext);
+
+    const [billingInfoSame, setBillingInfoSame] = useState(false);
+
+    const handleChange = event => {
+      if (event.target.checked) {
+        console.log('✅ Checkbox is checked');
+      } else {
+        console.log('⛔️ Checkbox is NOT checked');
+      }
+      setBillingInfoSame(current => !current);
+    };
     
 
     if (cart.length === 0){
-        
-        <div className="w-100 h-80 p-2 text-center">
+        return(
+            <div className="w-100 h-80 p-5 text-center">
 
-            <div>
-                <p className="mb-0">Todavía no tenés ningún producto en tu carrito. Te invitamos a mirar nuestros productos en el siguiente link:</p>
-                <Link className="" to="/todos-los-productos">Ver todos los productos</Link>
+                <div>
+                    <p className="mb-0">Todavía no tenés ningún producto en tu carrito. Te invitamos a mirar nuestros productos en el siguiente link:</p>
+                    <p className="mt-3"><Link to="/todos-los-productos">Ver todos los productos</Link></p>
+                </div>
             </div>
-        </div>
+        )
 
     } else{
 
@@ -66,12 +78,12 @@ const Checkout = () => {
                                     </Form.Group>
                                 </div>
                             </div>
-                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Mis datos de envío serán los mismos que los de facturación" />
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                            <Form.Check id="billingInfoSame" type="checkbox" onChange={handleChange} label="Mis datos de facturación serán los mismos que los de envío serán los mismos que los de facturación" />
                         </Form.Group>
                         </div>
 
-                        <div>
+                        {!billingInfoSame ? <div>
                             <h4>Dirección de facturacción</h4>
                             <Form.Group className="mb-3 col-6 pe-3" controlId="name">
                                 <Form.Label>Nombre/s</Form.Label>
@@ -82,7 +94,7 @@ const Checkout = () => {
                                 <Form.Label>Apellido/s</Form.Label>
                                 <Form.Control type="text" placeholder="Tu apellido" />
                             </Form.Group>
-                        </div>
+                        </div>: null}
 
 
                         <Button variant="primary" type="submit">

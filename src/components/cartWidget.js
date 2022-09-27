@@ -60,7 +60,10 @@ const CartWidget = () => {
                         </div>
                         <div className='p-3 d-flex w-100'>
                             <button onClick={removeAllItems} className="btn btn-secondary w-100 me-2">Vaciar carrito</button>
-                            <Link to="/cart" className="btn btn-primary w-100">Terminar compra</Link>
+                            <Link to="/cart" className="btn btn-primary w-100">Ver carrito</Link>
+                        </div>
+                        <div className='ps-3 pe-3 pt-0 d-flex w-100'>
+                        <Link to="/checkout" className="btn btn-primary w-100">Iniciar compra</Link>
                         </div>
                     </div>
                     : null}
