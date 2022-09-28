@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import Ellipsis from "./ellipsis";
 import ItemDetail from "./itemDetail";
-// import { getProducts } from '../helpers/getProducts.js';
 import { useParams } from 'react-router-dom'; 
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/config"; 

@@ -22,7 +22,8 @@ function App() {
           <Route path="*" element={ <Navigate to="/"/> }/>
           <Route path="/producto/:itemSlug" element={ <ItemDetailContainer/> }/>
           <Route path="/cart" element={<Cart/>}/>
-          <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/checkout/entrega" element={<Checkout/>}/>
+          <Route path="/checkout/pago" element={<Checkout/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
