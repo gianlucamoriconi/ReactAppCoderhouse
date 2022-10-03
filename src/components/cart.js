@@ -69,7 +69,7 @@ const Cart = () => {
                         <div className='p-3 d-flex w-100'>
                             <Link to="/todos-los-productos" className="btn btn-secondary me-3">Seguir comprando</Link>
                             <button onClick={removeAllItems} className="btn btn-secondary me-3">Vaciar carrito</button>
-                            <Link to="/checkout" className="btn btn-primary">Finalizar compra</Link>
+                            <Link to="/checkout/entrega" className="btn btn-primary">Iniciar compra</Link>
                         </div>
                     </div>
 

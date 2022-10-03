@@ -1,21 +1,18 @@
-import { useContext, useState } from "react";
-import { CartContext } from "../context/cartContext";
+import { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
-import { useParams } from 'react-router-dom';
+import { CartContext } from "../../context/cartContext";
+import ResumeCheckout from "./resumeCheckout";
 
 
 
 const Checkout = () => {
 
-    const { cart = {}, removeItem, removeAllItems, totalAmountInCart } = useContext(CartContext);
-
     const [billingInfoSame, setBillingInfoSame] = useState(false);
     const [shippingAddressNumber, setShippingAddressNumber] = useState(false);
     const [billingAddressNumber, setBillingAddressNumber] = useState(false);
-    const {stage} = useParams();
-
-
+    const { cart = {} } = useContext(CartContext);  
+    
     const handleChangeBillingSame = event => {
         setBillingInfoSame(current => !current);
     };
@@ -94,7 +91,7 @@ const Checkout = () => {
                                     <div className="d-flex">
                                         <Form.Group className="mb-3 col-3 pe-3" controlId="shippingAddressNumber">
                                             <Form.Control disabled={shippingAddressNumber ? "disabled" : null} type="text" placeholder="Altura" />
-                                            <Form.Check onChange={handleChangeShippingAddressNumber} className="mt-3" fw-light type="checkbox" label="Sin altura" />
+                                            <Form.Check onChange={handleChangeShippingAddressNumber} className="mt-3" type="checkbox" label="Sin altura" />
                                         </Form.Group>
                                         <Form.Group className="mb-3 col-9" controlId="shippingAddressNumber">
                                             <Form.Control type="text" placeholder="Departamento (opcional)" />
@@ -139,47 +136,11 @@ const Checkout = () => {
                     </div>
 
                     {/* resumen de la orden*/}
-
-                    <div className="p-5 pt-0 col-5">
-                        <div id="orderResume" className="row p-3 m-0 shadow bg-body rounded">
-
-                            <div>
-                                {cart.length < 1 ? <div>
-                                    Aquí estarán los productos que llevas comprando
-                                </div>:
-                                cart.map((item, i) => (
-                                    <div key={i}>
-                                    <div className="d-flex">
-                                        <div className="col-3 item-cart-col-img">
-                                            <img className="w-100" src={item.image}/>
-                                        </div>
-                                        <div className='col-7 item-cart-col-info'>
-                                            <h3 className='item-name-cart'>{item.name}</h3>
-                                            <p className='item-info-cart item-price-cart'>${new Intl.NumberFormat('es-AR').format(item.price)}</p>
-                                            <p className='item-info-cart item-quantity-cart'>Cantidad: {item.quantity}</p>
-                                            {item.option1 !== null || item.option2 !== null ? 
-                                            <div className="variants item-quantity-cart">
-                                                <p> Variante:
-                                                {item.text !== null ?
-                                                <span> {item.text}</span>
-                                                :null}
-                                                </p>
-                                            </div>:null}
-                                        </div>
-                                    </div>
-                                    <hr/>
-                                    </div>
-                                ))
-                                }
-                            </div>
-                            <div className='pt-4 d-flex w-100'>
-                                <h4 className='text-end w-100'>Total: ${new Intl.NumberFormat('es-AR').format(totalAmountInCart())}</h4>
-                            </div>
-                        </div>
-                    </div>
+                    <ResumeCheckout/>
                 </div>
             </div>
         )
+
     }
 }
 export default Checkout;
