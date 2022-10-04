@@ -8,7 +8,7 @@ const ResumeCheckout = () => {
     const { cart = {}, totalAmountInCart } = useContext(CartContext);    
 
     return (
-        <div className="p-5 pt-0 col-5">
+        <div className="p-5 pt-0 col-md-5 col-12">
         <div id="orderResume" className="row p-3 m-0 shadow bg-body rounded">
 
             <div>

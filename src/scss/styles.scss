@@ -372,3 +372,9 @@ select{
 .payment-option{
   background-color: #fff;
 }
+
+@media (max-width){
+  .title-payment{
+    font-size: 14px;
+  }
+}
