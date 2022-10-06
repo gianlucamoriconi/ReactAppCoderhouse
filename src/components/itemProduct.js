@@ -17,7 +17,7 @@ const ItemProduct = ({product}) => {
 
     return (
         <>
-            <div className ="item p-0 col-6 col-md-4 col-lg-3 bg-body rounded" key={id}>
+            <div className ="item p-0 col-12 col-md-4 col-lg-3 bg-body rounded" key={id}>
                 <div className= "item-image">
                 <Link to={productLink}>
                     <img className="rounded" src={featuredImage} alt={"product"}></img>

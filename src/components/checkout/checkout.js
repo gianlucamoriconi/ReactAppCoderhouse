@@ -4,16 +4,19 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { CartContext } from "../../context/cartContext";
 import ResumeCheckout from "./resumeCheckout";
-
+import { MdOutlineLocalShipping } from "react-icons/md";
+import { BiCheck } from "react-icons/bi";
+import { FaStore } from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 
 
 const Checkout = () => {
 
     const [billingInfoRequired, setBillingInfoRequired] = useState(false);
-    const [shippingAddressNumber, setShippingAddressNumber] = useState(false);
-    const [billingAddressNumber, setBillingAddressNumber] = useState(false);
-    const [isShip, setIsShip] = useState(true);
+    const [shippingAddressNumberDisabled, setShippingAddressNumberDisabled] = useState(false);
+    const [billingAddressNumberDisabled, setBillingAddressNumberDisabled] = useState(false);
+    const [isShip, setIsShip] = useState();
     const [business, setBusiness] = useState(true);
     const navigate = useNavigate();
     const { cart = {} } = useContext(CartContext);
@@ -39,7 +42,7 @@ const Checkout = () => {
 
     const [validated, setValidated] = useState(false);
 
-    // const goToPay = useCallback(() => navigate('/checkout/pago', {replace: true}), [navigate]);
+    const goToPay = useCallback(() => navigate('/checkout/pago', {replace: true}), [navigate]);
 
     const handleShipOrPickup = () => {
         const ship = document.getElementById("ship");
@@ -47,8 +50,14 @@ const Checkout = () => {
 
         if (ship.checked){
             setIsShip(true);
+            document.querySelector(".radio-button-big.ship").classList.add("active");
+            document.querySelector(".radio-button-big.pickup").classList.remove("active");
+
         } else if (pickup.checked){
             setIsShip(false);
+            document.querySelector(".radio-button-big.pickup").classList.add("active");
+            document.querySelector(".radio-button-big.ship").classList.remove("active");
+
         }
     };
 
@@ -69,10 +78,13 @@ const Checkout = () => {
         event.preventDefault();
 
         if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
+            event.preventDefault();
+            event.stopPropagation();
+        } else{
+            goToPay();
         }
-    
+        
+
         setValidated(true);
 
         const orderInfo = {
@@ -109,12 +121,14 @@ const Checkout = () => {
 
     const handleChange = (e) => {
 
+        //Si es un radio, pasamos como valor el ID.
         if (e.target.type === "radio") {
             setValues({
                 ...values,
                 [e.target.name]: e.target.id
             })
         } else{
+            //Si otro (hasta el momento campos de entrada de texto), pasamos como valor el value.
             setValues({
                 ...values,
                 [e.target.name]: e.target.value
@@ -124,7 +138,6 @@ const Checkout = () => {
     
 
     const handleBillingRequired = (e) => {
-
         const billingAndShippingInfoIsSameCheckbox = document.getElementById("billingInfoSame");
         const pickupRadioInput = document.getElementById("pickup");
 
@@ -137,6 +150,8 @@ const Checkout = () => {
             }
         } else if(e.target.id === "pickup"){
             setBillingInfoRequired(true);
+            setBillingAddressNumberDisabled(false);
+            setShippingAddressNumberDisabled(false)
         } else if(e.target.id === "ship"){
             if (billingInfoRequired){
                 //Esto es porque al clickear Pickup aparece el form de billing.
@@ -144,28 +159,46 @@ const Checkout = () => {
                 // el box de "Info de envío igual a la de billing", es necesario ocultar el form de billing para que coincida
                 // con el checkbox.
                 setBillingInfoRequired(false);
+                setBillingAddressNumberDisabled(false);
+                setShippingAddressNumberDisabled(false)
             }
         }
     };
 
     const handleChangeShippingAddressNumber = event => {
+
         const addressNumberInput = document.getElementById("shippingAddressNumber");
         const addressNumberValue = addressNumberInput.value;
 
-        if (addressNumberValue.length > 0) {
-            document.getElementById("shippingAddressNumber").value = "";
+        if (event.target.checked === true){
+
+            setShippingAddressNumberDisabled(true)
+
+            if (addressNumberValue.length > 0) {
+                document.getElementById("shippingAddressNumber").value = "";
+            }
+
+        } else if (event.target.checked === false){
+            setShippingAddressNumberDisabled(false)
         }
-        setShippingAddressNumber(current => !current);
     };
 
     const handleChangeBillingAddressNumber = event => {
+
         const addressNumberInput = document.getElementById("billingAddressNumber");
         const addressNumberValue = addressNumberInput.value;
 
-        if (addressNumberValue.length > 0) {
-            document.getElementById("billingAddressNumber").value = "";
+        if (event.target.checked === true){
+
+            setBillingAddressNumberDisabled(true)
+
+            if (addressNumberValue.length > 0) {
+                document.getElementById("billingAddressNumber").value = "";
+            }
+
+        } else if (event.target.checked === false){
+            setBillingAddressNumberDisabled(false)
         }
-        setBillingAddressNumber(current => !current);
     };
     
 
@@ -196,8 +229,8 @@ const Checkout = () => {
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
                             <div className="mb-5">
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label name="email" required value={values.email} onChange={handleChange} >Email</Form.Label>
-                                    <Form.Control type="email" placeholder="Dejanos un email" />
+                                    <Form.Label name="email" value={values.email} onChange={handleChange} >Email</Form.Label>
+                                    <Form.Control type="email" required placeholder="Dejanos un email" />
                                     <Form.Text className="text-muted">
                                     Se utilizará únicamente para identificar tu compra.
                                     </Form.Text>
@@ -206,10 +239,38 @@ const Checkout = () => {
 
                             <div className="mb-5">
                                 <h4 className="mb-4">¿Cómo quieres recibir tu compra?</h4>
-                                <Form.Group required className="mb-3" controlId="shippingMethod" onChange={handleBillingRequired}>
-                                    <Form.Check name="shippingMethod" id="ship" type="radio" onClick={handleShipOrPickup} onChange={handleChange} value={values.shippingMethod} inline label="Entrega a domicilio" />
-                                    <Form.Check name="shippingMethod" id="pickup" type="radio" onClick={handleShipOrPickup} onChange={handleChange} value={values.shippingMethod} inline label="Retiro" />
-                                </Form.Group>
+                                <div className="d-flex">
+                                    <Form.Group required className="mb-3 d-flex w-100" controlId="shippingMethod" onChange={handleBillingRequired}>
+                                        <div className="radio-button-big col-6 ship pe-4">
+                                                <label htmlFor="shippingMethod" className="js-radio-button-label">
+                                                    <input type="radio" name="shippingMethod" value={values.shippingMethod} onClick={handleShipOrPickup} onChange={handleChange} id="ship"/>
+                                                    <div className="shipping-icon-container p-1 pb-0">
+                                                        <MdOutlineLocalShipping/>
+                                                    </div>
+                                                    Entrega a domicilio
+                                                    <span className="icon-check">
+                                                        <IconContext.Provider value={{ className: "icon-check-svg", width: 50 }}>
+                                                            <BiCheck/>
+                                                        </IconContext.Provider>
+                                                    </span>
+                                                </label>
+                                        </div>
+                                        <div className="radio-button-big pickup col-6">
+                                                <label htmlFor="shippingMethod" className="js-radio-button">
+                                                    <input type="radio" name="shippingMethod" value={values.shippingMethod} onClick={handleShipOrPickup} onChange={handleChange} id="pickup"/>
+                                                    <div className="shipping-icon-container p-1 pb-0">
+                                                        <FaStore/>
+                                                    </div>
+                                                    Retiro en tienda
+                                                    <span className="icon-check">
+                                                        <IconContext.Provider value={{ className: "icon-check-svg", width: 50 }}>
+                                                            <BiCheck/>
+                                                        </IconContext.Provider>
+                                                    </span>
+                                                </label>
+                                        </div>
+                                    </Form.Group>
+                                </div>
                             </div>
 
 
@@ -231,7 +292,7 @@ const Checkout = () => {
                                     </Form.Group>
                                     <div className="d-flex flex-wrap">
                                         <Form.Group className="mb-3 col-4 pe-3" controlId="shippingAddressNumber">
-                                            <Form.Control name="shippingAddressNumber" disabled={shippingAddressNumber ? "disabled" : null} value={values.shippingAddressNumber} onChange={handleChange} type="text" placeholder="Altura" />
+                                            <Form.Control name="shippingAddressNumber" disabled={shippingAddressNumberDisabled} required={shippingAddressNumberDisabled ? false : true}  value={values.shippingAddressNumber} onChange={handleChange} type="text" placeholder="Altura" />
                                             <Form.Check onChange={handleChangeShippingAddressNumber} className="mt-3" type="checkbox" label="Sin altura" />
                                         </Form.Group>
                                         <Form.Group className="mb-3 col-4 pe-3" controlId="shippingAddressDpto">
@@ -285,11 +346,11 @@ const Checkout = () => {
                                 </div>
                                 <div className="mb-4">
                                     <Form.Group className="mb-3 col-12" controlId="billingAddressAddress">
-                                        <Form.Control name="billingAddressAddress" type="text" value={values.billingAddressAddress} onChange={handleChange} placeholder="Nombre de la calle" />
+                                        <Form.Control name="billingAddressAddress" type="text" required value={values.billingAddressAddress} onChange={handleChange} placeholder="Nombre de la calle" />
                                     </Form.Group>
                                     <div className="d-flex flex-wrap">
                                         <Form.Group className="mb-3 col-4 pe-3" controlId="billingAddressNumber">
-                                            <Form.Control name="billingAddressNumber" disabled={billingAddressNumber ? "disabled" : null} value={values.billingAddressNumber} onChange={handleChange} type="text" placeholder="Altura" />
+                                            <Form.Control name="billingAddressNumber" disabled={billingAddressNumberDisabled}  required={billingAddressNumberDisabled ? false : true} value={values.billingAddressNumber} onChange={handleChange} type="text" placeholder="Altura" />
                                             <Form.Check onChange={handleChangeBillingAddressNumber} className="mt-3" type="checkbox" label="Sin altura" />
                                         </Form.Group>
                                         <Form.Group className="mb-3 col-4 pe-3" controlId="billingAddressDpto">

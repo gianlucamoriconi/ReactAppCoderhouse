@@ -72,6 +72,8 @@ font-family: 'Manrope', sans-serif;
   font-weight: 900;
 }
 
+
+
 .example-container-grid{
   width: 90%;
   height: 40vh;
@@ -377,4 +379,82 @@ select{
   .title-payment{
     font-size: 14px;
   }
+}
+
+.radio-button-big.active .icon-check {
+  display: block;
+}
+
+.radio-button-big.active .icon-check {
+  display: block;
+}
+
+.radio-button-big label .icon-check {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #198754;
+  border-radius: 30px;
+  border: 2px solid currentColor;
+  top: -10px;
+  right: -3px;
+  display: none;
+  text-align: center;
+  line-height: 30px;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.icon-check-svg {
+  margin-top: -7px;
+}
+
+
+.radio-button-big label {
+  display: block;
+  text-align: center;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  padding: 15px 0;
+  color: #bfbbbd;
+  padding: 7.5px;
+  font-size: .8rem;
+  letter-spacing: -.144px;
+  line-height: 1.4;
+  transition: all .3s cubic-bezier(.19,1,.22,1);
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.radio-button-big.active label{
+  color: #198754;
+}
+
+.radio-button-big label div {
+  text-align: center;
+  font-size: 1.4rem;
+  padding: 15px 0;
+}
+
+.radio-button-big.active div {
+  color: #198754;
+}
+
+.radio-button-big label:hover {
+  box-shadow: 0 15px 30px -6px rgba(50, 50, 93, 0.2), 0 9px 18px -9px rgb(0 0 0 / 20%), 0 -6px 18px -4px rgb(0 0 0 / 2%);
+}
+
+.radio-button-big input {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
 }

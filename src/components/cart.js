@@ -13,8 +13,8 @@ const Cart = () => {
     return (
         <div id="cart-page">
             <div className="container">
-                <div className="p-4 mb-3"><h1 className="pb-4 text-center">Carrito</h1>
-                    <div className="p-5">
+                <div className="p-md-4 mb-3"><h1 className="pb-4 text-center">Carrito</h1>
+                    <div className="p-md-5">
                       
                         {cart.length < 1 ?
                         
@@ -66,10 +66,16 @@ const Cart = () => {
                             <h4 className='text-end w-100'>Total: ${new Intl.NumberFormat('es-AR').format(totalAmountInCart())}</h4>
                             <hr/>
                         </div>
-                        <div className='p-3 d-flex w-100'>
-                            <Link to="/todos-los-productos" className="btn btn-secondary me-3">Seguir comprando</Link>
-                            <button onClick={removeAllItems} className="btn btn-secondary me-3">Vaciar carrito</button>
-                            <Link to="/checkout/entrega" className="btn btn-primary">Iniciar compra</Link>
+                        <div className='d-flex flex-wrap w-100'>
+                           <div className="d-flex w-100 mb-3">
+                                <div className="pe-3">
+                                    <Link to="/todos-los-productos" className="btn btn-secondary">Seguir comprando</Link>
+                                </div>
+                                <div className="pe-3">
+                                    <button onClick={removeAllItems} className="btn btn-secondary">Vaciar carrito</button>
+                                </div>
+                            </div>
+                            <Link to="/checkout/entrega" className="btn w-100 btn-primary">Iniciar compra</Link>
                         </div>
                     </div>
 
