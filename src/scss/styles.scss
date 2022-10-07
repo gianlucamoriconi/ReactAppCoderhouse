@@ -395,7 +395,7 @@ select{
   height: 30px;
   background-color: #198754;
   border-radius: 30px;
-  border: 2px solid currentColor;
+  border: 2px solid #198754;
   top: -10px;
   right: -3px;
   display: none;
@@ -406,7 +406,9 @@ select{
 }
 
 .icon-check-svg {
-  margin-top: -7px;
+  margin-top: -5px;
+  width: 25px;
+  height: auto;
 }
 
 
@@ -443,7 +445,7 @@ select{
   color: #198754;
 }
 
-.radio-button-big label:hover {
+.radio-button-big label:hover, .radio-button-big.active label {
   box-shadow: 0 15px 30px -6px rgba(50, 50, 93, 0.2), 0 9px 18px -9px rgb(0 0 0 / 20%), 0 -6px 18px -4px rgb(0 0 0 / 2%);
 }
 
