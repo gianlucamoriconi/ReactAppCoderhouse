@@ -63,7 +63,7 @@ const CartWidget = () => {
                             <Link to="/cart" className="btn btn-primary w-100">Ver carrito</Link>
                         </div>
                         <div className='ps-3 pe-3 pt-0 d-flex w-100'>
-                        <Link to="/checkout/entrega" className="btn btn-primary w-100">Iniciar compra</Link>
+                        <Link to="/checkout/datos" className="btn btn-primary w-100">Iniciar compra</Link>
                         </div>
                     </div>
                     : null}

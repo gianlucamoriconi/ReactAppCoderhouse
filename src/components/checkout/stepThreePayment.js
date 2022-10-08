@@ -2,13 +2,25 @@ import { useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import { CartContext } from "../../context/cartContext";
+import { OrderContext } from "../../context/orderContext";
 import ResumeCheckout from "./resumeCheckout";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase/config"; 
 
 
 
-const PaymentStage = () => {
-
+const StepThreePayment = () => {
+    const { order = {} } = useContext(OrderContext);
     const { cart = {} } = useContext(CartContext);  
+
+    // function sendOrder(order){
+    //     const ordersRef = collection(db, 'orders');
+    //     addDoc(ordersRef, order)
+    //         .then( (doc) =>{
+    //             console.log(doc.id)
+    //         })
+    // };
+
     
 
     if (cart.length === 0){
@@ -83,11 +95,9 @@ const PaymentStage = () => {
 
                         <div className="d-flex">
                         <Link to="/checkout/entrega" className="col-3 me-3 btn btn-secondary">Volver</Link>
-                        <Link to="/checkout/pago" className="col-9 btn btn-primary">Finalizar la compra</Link>
+                        <button className="col-9 btn btn-primary" >Finalizar la compra</button>
                         </div>
                     </div>
-
-                    {/* resumen de la orden*/}
                     <ResumeCheckout/>
                 </div>
             </div>
@@ -95,4 +105,4 @@ const PaymentStage = () => {
 
     }
 }
-export default PaymentStage;
+export default StepThreePayment;

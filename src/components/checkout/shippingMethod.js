@@ -5,14 +5,16 @@ import { IconContext } from "react-icons";
 import Form from 'react-bootstrap/Form';
 
 
+
 const ShippingMethod = (props) => {
 
-    const { values, handleChange, handleShipOrPickup, handleBillingRequired } = props;
+    const { values, handleChange, handleShipOrPickup, handleBillingRequired, isShip, isPickup } = props;
+
 
     return (
         <div className="mb-5">
             <h4 className="mb-4">¿Cómo querés recibir tu compra?</h4>
-            <div className="d-flex">
+            <div className="d-flex flex-wrap">
                 <Form.Group required className="mb-3 d-flex w-100" controlId="shippingMethod" onChange={handleBillingRequired}>
                     <div className="radio-button-big col-6 ship pe-4">
                             <label htmlFor="shippingMethod" className="js-radio-button-label">

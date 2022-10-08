@@ -8,12 +8,15 @@ import ItemDetailContainer from './components/itemDetailContainer';
 import { CartProvider } from './context/cartContext';
 import Cart from './components/cart';
 import Checkout from './components/checkout/checkout';
-import PaymentStage from './components/checkout/paymentStage';
+import StepTwoShippingMethod from './components/checkout/stepTwoShippingMethod';
+import StepThreePayment from './components/checkout/stepThreePayment';
+import { OrderProvider } from './context/orderContext';
  
 function App() {
 
   return (
     <CartProvider>
+    <OrderProvider>
       <BrowserRouter>
         <Header />
         <Routes>
@@ -23,11 +26,13 @@ function App() {
           <Route path="*" element={ <Navigate to="/"/> }/>
           <Route path="/producto/:itemSlug" element={ <ItemDetailContainer/> }/>
           <Route path="/cart" element={<Cart/>}/>
-          <Route path="/checkout/entrega" element={<Checkout/>}/>
-          <Route path="/checkout/pago" element={<PaymentStage/>}/>
+          <Route path="/checkout/datos" element={<Checkout/>}/>
+          <Route path="/checkout/entrega" element={<StepTwoShippingMethod/>}/>
+          <Route path="/checkout/pago" element={<StepThreePayment/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
+    </OrderProvider>
     </CartProvider>
   )
 }

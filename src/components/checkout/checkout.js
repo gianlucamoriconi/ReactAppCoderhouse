@@ -2,12 +2,15 @@ import { useState, useContext, useCallback } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { CartContext } from "../../context/cartContext";
+import { OrderContext } from "../../context/orderContext";
+
 import ResumeCheckout from "./resumeCheckout";
 import BillingForm from "./billingForm";
 import ShippingForm from "./shippingForm";
 import ShippingMethod from "./shippingMethod";
 import Form from 'react-bootstrap/Form';
-
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase/config"; 
 
 const Checkout = () => {
 
@@ -15,32 +18,35 @@ const Checkout = () => {
     const [shippingAddressNumberDisabled, setShippingAddressNumberDisabled] = useState(false);
     const [billingAddressNumberDisabled, setBillingAddressNumberDisabled] = useState(false);
     const [isShip, setIsShip] = useState();
+    const [isPickup, setIsPickup] = useState();
     const [business, setBusiness] = useState(true);
+    const { cart = {}, totalAmountInCart } = useContext(CartContext);
+    const { order, changeValue } = useContext(OrderContext);
+    const [validated, setValidated] = useState(false);
     const navigate = useNavigate();
-    const { cart = {} } = useContext(CartContext);
+    const goToShippingMethod = useCallback(() => navigate('/checkout/entrega', {replace: true}), [navigate]);
     const [values, setValues] = useState({
-        email: "",
-        consumerName: "",
-        consumerLastname: "",
-        shippingAddressAddress: "",
-        shippingAddressNumber: "",
-        shippingAddressDpto: "",
-        shippingPostalCode: "",
-        shippingMethod: "",
-        consumerPersonalId: "",
-        billingName: "",
-        billingLastname: "",
-        billingAddressAddress: "",
-        billingAddressNumber: "",
-        billingAddressDpto: "",
-        billingPersonalId: "",
-        shippingOptionName: "",
-        shippingOptionCost: ""
+        email: '',
+        consumerName: '',
+        consumerLastname: '',
+        shippingAddressAddress: '',
+        shippingAddressNumber: '',
+        shippingAddressDpto: '',
+        shippingPostalCode: '',
+        shippingMethod: '',
+        consumerPersonalId: '',
+        billingName: '',
+        billingBusinessName: '',
+        billingLastname: '',
+        billingAddressAddress: '',
+        billingAddressNumber: '',
+        billingAddressDpto: '',
+        billingPersonalId: '',
+        shippingMethod: '',
+        shippingOptionName: '',
+        shippingOptionCost: ''
     });
 
-    const [validated, setValidated] = useState(false);
-
-    const goToPay = useCallback(() => navigate('/checkout/pago', {replace: true}), [navigate]);
 
     const handleShipOrPickup = () => {
         const ship = document.getElementById("ship");
@@ -48,10 +54,12 @@ const Checkout = () => {
 
         if (ship.checked){
             setIsShip(true);
+            setIsPickup(false);
             document.querySelector(".radio-button-big.ship").classList.add("active");
             document.querySelector(".radio-button-big.pickup").classList.remove("active");
 
         } else if (pickup.checked){
+            setIsPickup(true);
             setIsShip(false);
             document.querySelector(".radio-button-big.pickup").classList.add("active");
             document.querySelector(".radio-button-big.ship").classList.remove("active");
@@ -70,6 +78,8 @@ const Checkout = () => {
         }
     };
 
+
+
     const handleSubmit = (event) => {
         const form = event.currentTarget;
 
@@ -79,42 +89,41 @@ const Checkout = () => {
             event.preventDefault();
             event.stopPropagation();
         } else{
-            goToPay();
+
+            setValidated(true);
+
+            const orderInfo = {
+                consumer: {
+                    consumerName: values.consumerName,
+                    consumerLastname: values.consumerLastname,
+                    email: values.email,
+                    consumerPersonalId: values.consumerPersonalId,
+                    addressStreet: values.shippingAddressAddress,
+                    addressNumber: values.shippingAddressNumber,
+                    addressDpto: values.shippingAddressDpto
+                },
+
+                billing: {
+                    billingName: values.billingName,
+                    billingLastname: values.billingLastname,
+                    billingAddressStreet: values.billingAddressAddress,
+                    billingAddressNumber: values.billingAddressNumber,
+                    billingAddressDpto: values.billingAddressDpto,
+                    billingPersonalId: values.billingPersonalId
+                },
+                
+                shipping: {
+                    shippingMethod: isShip ? "ship" : "pickup" ,
+                },
+
+                cart,
+                total: totalAmountInCart()
+            }
+            // setOrderInCookie(orderInfo);
+            changeValue(orderInfo);
+            // console.log(orderInfo);
+            goToShippingMethod();
         }
-        
-
-        setValidated(true);
-
-        const orderInfo = {
-            consumer: {
-                consumerName: values.consumerName,
-                consumerLastname: values.consumerLastname,
-                email: values.email,
-                consumerPersonalId: values.consumerPersonalId,
-                addressStreet: values.shippingAddressAddress,
-                addressNumber: values.shippingAddressNumber,
-                addressDpto: values.shippingAddressDpto
-            },
-
-            billing: {
-                billingName: values.billingName,
-                billingLastname: values.billingLastname,
-                billingAddressStreet: values.billingAddressAddress,
-                billingAddressNumber: values.billingAddressNumber,
-                billingAddressDpto: values.billingAddressDpto,
-                billingPersonalId: values.billingPersonalId
-            },
-            
-            shipping: {
-                shippingMethod: values.shippingMethod,
-                shippingOptionSelected: values.shippingOption,
-                shippingOptionCost: values.shippingOptionCost
-            },
-
-            cart
-        }
-        console.log(orderInfo);
-
     };
 
     const handleChange = (e) => {
@@ -133,7 +142,6 @@ const Checkout = () => {
             })
         }
     };
-    
 
     const handleBillingRequired = (e) => {
         const billingAndShippingInfoIsSameCheckbox = document.getElementById("billingInfoSame");
@@ -216,7 +224,7 @@ const Checkout = () => {
             
             <div id="checkoutForm" className="">
                 <div className="ps-5 pe-5 pt-4 pb-4 w-100">
-                    <Link to="/checkout/entrega" className="btn p-0"><span className="breadcrumb-checkout">Entrega</span></Link>
+                    <Link to="/checkout/datos" className="btn p-0"><span className="breadcrumb-checkout">Entrega</span></Link>
                     <span className="ms-2 me-2 breadcrumb-checkout">/</span>
                     <Link to="/checkout/pago" className="btn p-0"><span className="breadcrumb-checkout">Pago</span></Link>
                 </div>
@@ -239,6 +247,8 @@ const Checkout = () => {
                                 handleChange={handleChange} 
                                 handleShipOrPickup={handleShipOrPickup} 
                                 handleBillingRequired={handleBillingRequired} 
+                                isShip={isShip}
+                                isPickup={isPickup}
                             />
 
 
@@ -265,11 +275,9 @@ const Checkout = () => {
                             : 
                             null}
                             
-                            <Button type="submit" className="btn btn-primary w-100">Ir a la etapa de pago</Button>
+                            <Button type="submit" className="btn btn-primary w-100">Ir a elegir la opción de entrega</Button>
                         </Form>
                     </div>
-
-                    {/* resumen de la orden*/}
                     <ResumeCheckout/>
                 </div>
             </div>

@@ -1,12 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export const CartContext = createContext()
+export const CartContext = createContext();
+
+const initCart = JSON.parse(localStorage.getItem('cart')) || [];
+
 
 export const CartProvider = ({children}) => {
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState(initCart)
   
     const addToCart = (item, counter) => {
       if (isInCart(item.id) === true){
@@ -18,6 +21,7 @@ export const CartProvider = ({children}) => {
             itemAddedNotify(item.name, counter);
           }
         });
+
 
       } else{
         setCart([...cart, item])
@@ -58,7 +62,16 @@ export const CartProvider = ({children}) => {
 
       return totalAmount;
     }
+
+
+    //Cart in cookie
+
+    useEffect( () => {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
     
+
+
     return (
         <CartContext.Provider value={{
             cart,

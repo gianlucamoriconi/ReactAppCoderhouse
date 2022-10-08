@@ -75,7 +75,7 @@ const Cart = () => {
                                     <button onClick={removeAllItems} className="btn btn-secondary">Vaciar carrito</button>
                                 </div>
                             </div>
-                            <Link to="/checkout/entrega" className="btn w-100 btn-primary">Iniciar compra</Link>
+                            <Link to="/checkout/datos" className="btn w-100 btn-primary">Iniciar compra</Link>
                         </div>
                     </div>
 
