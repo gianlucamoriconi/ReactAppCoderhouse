@@ -9,8 +9,6 @@ import BillingForm from "./billingForm";
 import ShippingForm from "./shippingForm";
 import ShippingMethod from "./shippingMethod";
 import Form from 'react-bootstrap/Form';
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../firebase/config"; 
 
 const Checkout = () => {
 
@@ -21,33 +19,38 @@ const Checkout = () => {
     const [isPickup, setIsPickup] = useState();
     const [business, setBusiness] = useState(true);
     const { cart = {}, totalAmountInCart } = useContext(CartContext);
-    const { order, changeValue } = useContext(OrderContext);
+    const { changeValue } = useContext(OrderContext);
+    let order = JSON.parse(localStorage.getItem('order'));
     const [validated, setValidated] = useState(false);
     const navigate = useNavigate();
     const goToShippingMethod = useCallback(() => navigate('/checkout/entrega', {replace: true}), [navigate]);
+
+    //Seteamos los valores al iniciar el form.
+    //Si existe algun dato guardado en Storage, lo completamos. Sino, lo dejamos vacío.
     const [values, setValues] = useState({
-        email: '',
-        consumerName: '',
-        consumerLastname: '',
-        shippingAddressAddress: '',
-        shippingAddressNumber: '',
-        shippingAddressDpto: '',
-        shippingPostalCode: '',
+        email: order.email || '',
+        consumerName: order.consumer.consumerName || '',
+        consumerLastname: order.consumer.consumerLastname || '',
+        shippingAddressAddress: order.consumer.addressStreet || '',
+        shippingAddressNumber: order.consumer.addressNumber || '',
+        shippingAddressDpto: order.consumer.addressDpto || '',
+        shippingPostalCode: order.consumer.postalCode || '',
         shippingMethod: '',
-        consumerPersonalId: '',
-        billingName: '',
-        billingBusinessName: '',
-        billingLastname: '',
-        billingAddressAddress: '',
-        billingAddressNumber: '',
-        billingAddressDpto: '',
-        billingPersonalId: '',
-        shippingMethod: '',
+        consumerPersonalId: order.consumer.consumerPersonalId ||'',
+        billingName: order.billing.billingName || '',
+        billingBusinessName: order.billing.billingBusinessName || '',
+        billingLastname: order.billing.billingLastname || '',
+        billingAddressAddress: order.billing.billingAddressStreet || '',
+        billingAddressNumber: order.billing.billingAddressNumber || '',
+        billingAddressDpto: order.billing.billingAddressDpto || '',
+        billingPersonalId: order.billing.billingPersonalId || '',
+        billingPostalCode: order.billing.billingPostalCode || '',
         shippingOptionName: '',
         shippingOptionCost: ''
     });
 
 
+    //Capturamos el cambio de elección en si es Ship (Envío a domicilio) o Pickup (retiro)
     const handleShipOrPickup = () => {
         const ship = document.getElementById("ship");
         const pickup = document.getElementById("pickup");
@@ -67,6 +70,7 @@ const Checkout = () => {
         }
     };
 
+    // Si en el formulario de Billing eligen Persona o Empresa
     const handleBusiness = () => {
         const business = document.getElementById("business");
         const person = document.getElementById("person");
@@ -80,6 +84,8 @@ const Checkout = () => {
 
 
 
+    //Envío de formulario en la etapa "Datos".
+    //Guarda los datos ingresados en Storage
     const handleSubmit = (event) => {
         const form = event.currentTarget;
 
@@ -93,32 +99,34 @@ const Checkout = () => {
             setValidated(true);
 
             const orderInfo = {
+                email: values.email,
                 consumer: {
-                    consumerName: values.consumerName,
-                    consumerLastname: values.consumerLastname,
-                    email: values.email,
-                    consumerPersonalId: values.consumerPersonalId,
-                    addressStreet: values.shippingAddressAddress,
-                    addressNumber: values.shippingAddressNumber,
-                    addressDpto: values.shippingAddressDpto
+                    consumerName: isShip ? values.consumerName : '',
+                    consumerLastname: isShip ? values.consumerLastname : '',
+                    consumerPersonalId: isShip ? values.consumerPersonalId : '',
+                    addressStreet: isShip ? values.shippingAddressAddress : '',
+                    addressNumber: isShip ? values.shippingAddressNumber : '',
+                    addressDpto: isShip ? values.shippingAddressDpto : '',
+                    postalCode: isShip ? values.shippingPostalCode : ''
                 },
 
                 billing: {
                     billingName: values.billingName,
+                    billingBusinessName: values.billingBusinessName,
                     billingLastname: values.billingLastname,
                     billingAddressStreet: values.billingAddressAddress,
                     billingAddressNumber: values.billingAddressNumber,
                     billingAddressDpto: values.billingAddressDpto,
+                    billingPostalCode: values.billingPostalCode,
                     billingPersonalId: values.billingPersonalId
                 },
                 
-                shipping: {
-                    shippingMethod: isShip ? "ship" : "pickup" ,
-                },
+                shippingMethod: isShip ? "ship" : "pickup" ,
 
                 cart,
                 total: totalAmountInCart()
             }
+            
             // setOrderInCookie(orderInfo);
             changeValue(orderInfo);
             // console.log(orderInfo);
@@ -141,6 +149,7 @@ const Checkout = () => {
                 [e.target.name]: e.target.value
             })
         }
+
     };
 
     const handleBillingRequired = (e) => {
@@ -224,7 +233,9 @@ const Checkout = () => {
             
             <div id="checkoutForm" className="">
                 <div className="ps-5 pe-5 pt-4 pb-4 w-100">
-                    <Link to="/checkout/datos" className="btn p-0"><span className="breadcrumb-checkout">Entrega</span></Link>
+                    <Link to="/checkout/datos" className="btn p-0"><span className="breadcrumb-checkout">Datos</span></Link>
+                    <span className="ms-2 me-2 breadcrumb-checkout">/</span>
+                    <Link to="/checkout/entrega" className="btn p-0"><span className="breadcrumb-checkout">Entrega</span></Link>
                     <span className="ms-2 me-2 breadcrumb-checkout">/</span>
                     <Link to="/checkout/pago" className="btn p-0"><span className="breadcrumb-checkout">Pago</span></Link>
                 </div>
@@ -233,9 +244,9 @@ const Checkout = () => {
                     <div className="p-5 pt-0 col-md-7 col-12">
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
                             <div className="mb-5">
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label name="email" value={values.email} onChange={handleChange} >Email</Form.Label>
-                                    <Form.Control type="email" required placeholder="Dejanos un email" />
+                                <Form.Group className="mb-3" controlId="email">
+                                    <Form.Label  >Email</Form.Label>
+                                    <Form.Control type="email" name="email" required value={values.email} onChange={handleChange} placeholder="Dejanos un email" />
                                     <Form.Text className="text-muted">
                                     Se utilizará únicamente para identificar tu compra.
                                     </Form.Text>

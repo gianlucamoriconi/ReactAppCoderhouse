@@ -11,7 +11,7 @@ const ResumeCheckout = () => {
         <div className="p-5 pt-0 col-md-5 col-12">
         <div id="orderResume" className="row p-3 m-0 shadow bg-body rounded">
 
-            <div>
+            <div className="overflow-scroll container-items h-56 pt-3">
                 {cart.length < 1 ? <div>
                     Aquí estarán los productos que llevas comprando
                 </div>:

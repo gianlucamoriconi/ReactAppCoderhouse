@@ -1,16 +1,16 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Link } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form';
 import { CartContext } from "../../context/cartContext";
 import { OrderContext } from "../../context/orderContext";
 import ResumeCheckout from "./resumeCheckout";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../firebase/config"; 
+// import { collection, addDoc } from "firebase/firestore";
+// import { db } from "../../firebase/config"; 
 
 
 
 const StepThreePayment = () => {
-    const { order = {} } = useContext(OrderContext);
+    // const { order = {} } = useContext(OrderContext);
     const { cart = {} } = useContext(CartContext);  
 
     // function sendOrder(order){
@@ -40,6 +40,8 @@ const StepThreePayment = () => {
             
             <div id="checkoutForm" className="">
                 <div className="ps-5 pe-5 pt-4 pb-4 w-100">
+                    <Link to="/checkout/datos" className="btn p-0"><span className="breadcrumb-checkout">Datos</span></Link>
+                    <span className="ms-2 me-2 breadcrumb-checkout">/</span>
                     <Link to="/checkout/entrega" className="btn p-0"><span className="breadcrumb-checkout">Entrega</span></Link>
                     <span className="ms-2 me-2 breadcrumb-checkout">/</span>
                     <Link to="/checkout/pago" className="btn p-0"><span className="breadcrumb-checkout">Pago</span></Link>

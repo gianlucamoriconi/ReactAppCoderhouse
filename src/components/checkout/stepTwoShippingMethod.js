@@ -2,21 +2,19 @@ import { useState, useEffect, useContext } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import ShippingOptionsContainer from './shippingOptionsContainer';
-import { OrderContext } from "../../context/orderContext";
 import ResumeCheckout from "./resumeCheckout";
 import { Link } from 'react-router-dom';
 import Ellipsis from "../ellipsis";
+import { OrderContext } from "../../context/orderContext";
 
 
 
 
 const StepTwoShippingMethod = () => {
-    // const { order = {} } = useContext(OrderContext);
     let order = JSON.parse(localStorage.getItem('order'))
-    console.log(order);
-    console.log(order.shipping.shippingMethod);
-    const initShip = order.shipping.shippingMethod === "ship" ? true : false;
-    const initPickup = order.shipping.shippingMethod === "pickup" ? true : false;
+    const { changeValue } = useContext(OrderContext);
+    const initShip = order.shippingMethod === "ship" ? true : false;
+    const initPickup = order.shippingMethod === "pickup" ? true : false;
     const [loading, setLoading] = useState(true);
     const [shippingOptions, setShippingOptions] = useState([]);
     const [pickupOptions, setPickupOptions] = useState([]);
@@ -34,7 +32,6 @@ const StepTwoShippingMethod = () => {
                 .then((prod) => {
                     const shipOpts = prod.docs.map( (doc) => doc.data() )
                     setShippingOptions(shipOpts);
-                    console.log(shippingOptions);
                 })
     
                 .catch( (error) =>{
@@ -81,19 +78,23 @@ const StepTwoShippingMethod = () => {
             <div className="p-5 pt-0 col-md-7 col-12">
                 <h4 className="mb-4">Elegí la opción de entrega</h4>
                 <div className="d-flex mb-4">
-                        {isShip && loading === false ? 
-                            <ShippingOptionsContainer 
-                                options={shippingOptions}       
-                                method="shippingMethod"
-                            />
-                        : null}
+                    {
+                        loading ? <div className="w-100 text-center"><Ellipsis/></div>: null
+                    }
 
-                        {isPickup && loading === false ?
-                            <ShippingOptionsContainer 
-                                options={pickupOptions}
-                                method="pickupMethod"
-                            />
-                        : null}
+                    {isShip && loading === false ? 
+                        <ShippingOptionsContainer 
+                            options={shippingOptions}       
+                            method="shippingMethod"
+                        />
+                    : null}
+
+                    {isPickup && loading === false ?
+                        <ShippingOptionsContainer 
+                            options={pickupOptions}
+                            method="pickupMethod"
+                        />
+                    : null}
                 </div>
                 <div className="d-flex">
                     <Link to="/checkout/datos" className="col-3 me-3 btn btn-secondary">Volver</Link>

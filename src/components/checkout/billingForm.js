@@ -41,7 +41,7 @@ const BillingForm = (props) =>{
                     </Form.Group>
                     <div className="d-flex flex-wrap">
                         <Form.Group className="mb-3 col-4 pe-3" controlId="billingAddressNumber">
-                            <Form.Control name="billingAddressNumber" disabled={billingAddressNumberDisabled}  required={billingAddressNumberDisabled ? false : true} value={values.billingAddressNumber} onChange={handleChange} type="text" placeholder="Altura" />
+                            <Form.Control name="billingAddressNumber" disabled={billingAddressNumberDisabled}  required={billingAddressNumberDisabled ? false : true} value={billingAddressNumberDisabled ? '' : values.billingAddressNumber} onChange={handleChange} type="text" placeholder="Altura" />
                             <Form.Check onChange={handleChangeBillingAddressNumber} className="mt-3" type="checkbox" label="Sin altura" />
                         </Form.Group>
                         <Form.Group className="mb-3 col-4 pe-3" controlId="billingAddressDpto">

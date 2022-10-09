@@ -9,7 +9,7 @@ const ShippingForm = (props) => {
             <h4 className="mb-4">Datos de envío</h4>
             <div className="d-flex">
                 <Form.Group className="mb-3 col-6 pe-3" controlId="name">
-                    <Form.Control name="consumerName" required value={values.name} onChange={handleChange} type="text" placeholder="Tu nombre" />
+                    <Form.Control name="consumerName" required value={values.consumerName} onChange={handleChange} type="text" placeholder="Tu nombre" />
                 </Form.Group>
 
                 <Form.Group className="mb-3 col-6" controlId="lastname">
@@ -22,7 +22,7 @@ const ShippingForm = (props) => {
                 </Form.Group>
                 <div className="d-flex flex-wrap">
                     <Form.Group className="mb-3 col-4 pe-3" controlId="shippingAddressNumber">
-                        <Form.Control name="shippingAddressNumber" disabled={shippingAddressNumberDisabled} required={shippingAddressNumberDisabled ? false : true}  value={values.shippingAddressNumber} onChange={handleChange} type="text" placeholder="Altura" />
+                        <Form.Control name="shippingAddressNumber" disabled={shippingAddressNumberDisabled} required={shippingAddressNumberDisabled ? false : true}  value={shippingAddressNumberDisabled ? '' : values.shippingAddressNumber} onChange={handleChange} type="text" placeholder="Altura" />
                         <Form.Check onChange={handleChangeShippingAddressNumber} className="mt-3" type="checkbox" label="Sin altura" />
                     </Form.Group>
                     <Form.Group className="mb-3 col-4 pe-3" controlId="shippingAddressDpto">
