@@ -10,9 +10,9 @@ import { OrderContext } from "../../context/orderContext";
 
 
 
+
 const StepTwoShippingMethod = () => {
-    let order = JSON.parse(localStorage.getItem('order'))
-    const { changeValue } = useContext(OrderContext);
+    const { order } = useContext(OrderContext);
     const initShip = order.shippingMethod === "ship" ? true : false;
     const initPickup = order.shippingMethod === "pickup" ? true : false;
     const [loading, setLoading] = useState(true);
@@ -54,7 +54,6 @@ const StepTwoShippingMethod = () => {
                 .then((prod) => {
                     const pickOpts = prod.docs.map( (doc) => doc.data() )
                     setPickupOptions(pickOpts);
-                    console.log(pickupOptions);
                 })
     
                 .catch( (error) =>{

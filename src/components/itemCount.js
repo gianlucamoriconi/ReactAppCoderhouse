@@ -6,7 +6,6 @@ const ItemCount = (props) => {
     const handleAddQuantity = () => {
         
         if (counter === stock ){
-            console.log("No es posible sumar más unidades porque no hay suficiente stock");
         } else{
             setCounter(counter + 1)
         }
@@ -20,7 +19,6 @@ const ItemCount = (props) => {
 
     const handleStock = () => {
         if (counter <= stock){
-            console.log(stock - counter);
         } else{
             alert("No hay suficiente stock. Prueba agregar menos unidades")
         }

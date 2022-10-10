@@ -18,12 +18,6 @@ const ItemDetail = ({item}) => {
     const [variantSelected, setVariantSelected] = useState();
     const [stock, setStock] = useState(Boolean(variants) === false ? item.stock : undefined);
 
-    if (stock === undefined){
-        console.log("Stock es undefined");
-    } else{
-        console.log("Stock es otra cosa");
-    }
-
     //Calcula el stock que queda del item teniendo en cuenta lo agregado al carrito
     function calculateStockWithCartContext(product){
         if (cart.length > 0){

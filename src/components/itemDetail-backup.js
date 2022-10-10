@@ -20,13 +20,11 @@ const ItemDetail = ({item}) => {
         //Si tiene valor en propiedad 1, cambiamos el null por el valor de la misma 
         if (value1 !== null){
             setOption1(item.value1[0].id);
-            console.log(option1);
         }
     
         //Si tiene valor en propiedad 2, cambiamos el null por el valor de la misma 
         if (value2 !== null){
             setOption2(item.value2[0].id);
-            console.log(option2);
         }
     }, [option1, option2])
 
@@ -36,44 +34,14 @@ const ItemDetail = ({item}) => {
         //Si tiene valor en propiedad 1, cambiamos el null por el valor de la misma 
         if (value1 !== null){
             setOption1(item.value1[0].id);
-            console.log(option1);
         }
     
         //Si tiene valor en propiedad 2, cambiamos el null por el valor de la misma 
         if (value2 !== null){
             setOption2(item.value2[0].id);
-            console.log(option2);
         }
     }, [option1, option2])
 
-
-    // /* STOCK */
-    // useEffect( () =>{
-    //     //Si stock no es null significa que el producto no tiene variantes
-    //     //Entonces cambiamos el null por item.stock
-    //     //En cambio si es null, es porque el stock está en item.variants
-
-    //     if (stock !== null){
-    //         setStock(item.stock);
-    //         console.log(stock);
-    //     }
-        
-    //     //Definimos stock de productos con variantes
-    //     if ((option1 !== null) && (option2 === null)) {
-    //         let option1Selected = variants.filter(variant => (variant.value1[0] === option1));
-    //         console.log(option1Selected);
-    //         console.log(variants);
-    //         console.log(option1);
-
-    //     }
-
-    //     if ((option1 !== null) && (option2 !== null)) {
-    //         let option2Selected = variants.filter(variant => (variant.value1 === option1) && (variant.value2 === option2));
-    //         console.log(option2Selected);
-    //         console.log(variants);
-
-    //     }
-    // }, [option1, option2])
 
     let hasVariants = false;
 
@@ -85,17 +53,17 @@ const ItemDetail = ({item}) => {
 
     
     const handleAddToCart = () => {
-        if (option1 !== null && option2 == null){
-            console.log(variants.filter(variant => (variant.value1 === option1) && (variant.value2 === option2)));
-        }
+        // if (option1 !== null && option2 == null){
+        //     console.log(variants.filter(variant => (variant.value1 === option1) && (variant.value2 === option2)));
+        // }
 
-        if (option1 !== null && option2 !== null){
-            const variantC = variants.filter(variant => {
-                return variant.value1 === option1 && variant.value2 === option2;
-            });
+        // if (option1 !== null && option2 !== null){
+        //     const variantC = variants.filter(variant => {
+        //         return variant.value1 === option1 && variant.value2 === option2;
+        //     });
 
-            console.log(variantC);
-        }
+        //     console.log(variantC);
+        // }
 
 
         const itemToCart = {
@@ -107,8 +75,7 @@ const ItemDetail = ({item}) => {
             quantity: counter
         }
         addToCart(itemToCart);
-        console.log(cart);
-        console.log(isInCart(item.id));
+
     }
 
     return (

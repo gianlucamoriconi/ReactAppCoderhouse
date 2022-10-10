@@ -22,7 +22,6 @@ const ItemDetailContainer = (props) => {
             .then((prod) => {
                 const productsDB = prod.docs.map( (doc) => doc.data() )
                 setItem(productsDB[0]);
-                console.log(productsDB[0])
             })
 
             .catch( (error) =>{

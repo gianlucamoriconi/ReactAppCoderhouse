@@ -9,11 +9,9 @@ import Form from 'react-bootstrap/Form';
 
 const ShippingOptionsContainer = ({options, method}) => {
 
-    const { order, setOrder, changeValue } = useContext(OrderContext);
-    console.log(order);
+    const { order, changeValue } = useContext(OrderContext);
 
     const addShippingInOrder = (e) => {
-        console.log(e.target);
        const orderUpdate = {
             ...order,
             shippingData: JSON.parse(e.target.getAttribute("data-option"))    
