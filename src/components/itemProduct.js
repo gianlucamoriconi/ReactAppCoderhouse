@@ -17,7 +17,7 @@ const ItemProduct = ({product}) => {
 
     return (
         <>
-            <div className ="item p-0 col-12 col-md-4 col-lg-3 bg-body rounded" key={id}>
+            <div className ="item p-0 col-6 col-md-4 col-lg-3 bg-body rounded" key={id}>
                 <div className= "item-image">
                 <Link to={productLink}>
                     <img className="rounded" src={featuredImage} alt={"product"}></img>
@@ -31,7 +31,7 @@ const ItemProduct = ({product}) => {
                         <Link to={productLink} className="text-decoration-none"><h4 className="item-name">{name}</h4></Link>
                     </div>
                     <div className="item-price-container mb-4">
-                        <span className="fw-bold item-price fs-4">${new Intl.NumberFormat('es-AR').format(price)}</span>
+                        <span className="fw-bold item-price">${new Intl.NumberFormat('es-AR').format(price)}</span>
                     </div>
                     {/* //El seeMore true es para mostrar el boton Ver más (icono de ojo) */}
                     <ItemCount stock={stock} name={name} productLink={productLink} addToCart={addToCart} quantity={false}  buttonAddToCart={false} seeMore={true}/>

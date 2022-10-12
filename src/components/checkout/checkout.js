@@ -9,6 +9,7 @@ import BillingForm from "./billingForm";
 import ShippingForm from "./shippingForm";
 import ShippingMethod from "./shippingMethod";
 import Form from 'react-bootstrap/Form';
+import Breadcrumbs from './breadcrumbs';
 
 const Checkout = () => {
 
@@ -25,8 +26,12 @@ const Checkout = () => {
     const navigate = useNavigate();
     const goToShippingMethod = useCallback(() => navigate('/checkout/entrega', {replace: true}), [navigate]);
 
-    //Seteamos los valores al iniciar el form.
-    //Si existe algun dato guardado en Storage, lo completamos. Sino, lo dejamos vacío.
+    /* 
+        Seteamos los valores al iniciar el form.
+        Si existe algun dato guardado en Storage, lo completamos. Sino, lo dejamos vacío.
+        En caso de que el checkbox de que la información de facturación será la misma que la de envío,
+        en los campos de billing completaremos con los datos de consumer, por eso el ternario con billingInfoRequired.
+    */
     const [values, setValues] = useState({
         email: order.email || '',
         consumerName: order.consumer.consumerName || '',
@@ -37,14 +42,14 @@ const Checkout = () => {
         shippingPostalCode: order.consumer.postalCode || '',
         shippingMethod: '',
         consumerPersonalId: order.consumer.consumerPersonalId ||'',
-        billingName: order.billing.billingName || '',
-        billingBusinessName: order.billing.billingBusinessName || '',
-        billingLastname: order.billing.billingLastname || '',
-        billingAddressAddress: order.billing.billingAddressStreet || '',
-        billingAddressNumber: order.billing.billingAddressNumber || '',
-        billingAddressDpto: order.billing.billingAddressDpto || '',
-        billingPersonalId: order.billing.billingPersonalId || '',
-        billingPostalCode: order.billing.billingPostalCode || '',
+        billingName: billingInfoRequired ? order.billing.billingName || '' : order.consumer.consumerName,
+        billingBusinessName: billingInfoRequired ? null : business ? order.billing.billingBusinessName || '' : null,
+        billingLastname: billingInfoRequired ? order.billing.billingLastname || '' : order.consumer.consumerLastname,
+        billingAddressAddress: billingInfoRequired ? order.billing.billingAddressStreet || '' : order.consumer.addressStreet,
+        billingAddressNumber: billingInfoRequired ? order.billing.billingAddressNumber || '' : order.consumer.addressNumber,
+        billingAddressDpto: billingInfoRequired ? order.billing.billingAddressDpto || '' : order.consumer.addressDpto,
+        billingPersonalId: billingInfoRequired ? order.billing.billingPersonalId || '' : order.consumer.consumerPersonalId,
+        billingPostalCode: billingInfoRequired ? order.billing.billingPostalCode || '' : order.consumer.postalCode,
         shippingOptionName: '',
         shippingOptionCost: ''
     });
@@ -101,24 +106,24 @@ const Checkout = () => {
             const orderInfo = {
                 email: values.email,
                 consumer: {
-                    consumerName: isShip ? values.consumerName : '',
-                    consumerLastname: isShip ? values.consumerLastname : '',
-                    consumerPersonalId: isShip ? values.consumerPersonalId : '',
-                    addressStreet: isShip ? values.shippingAddressAddress : '',
-                    addressNumber: isShip ? values.shippingAddressNumber : '',
-                    addressDpto: isShip ? values.shippingAddressDpto : '',
-                    postalCode: isShip ? values.shippingPostalCode : ''
+                    consumerName: isShip ? values.consumerName : null,
+                    consumerLastname: isShip ? values.consumerLastname : null,
+                    consumerPersonalId: isShip ? values.consumerPersonalId : null,
+                    addressStreet: isShip ? values.shippingAddressAddress : null,
+                    addressNumber: isShip ? values.shippingAddressNumber : null,
+                    addressDpto: isShip ? values.shippingAddressDpto : null,
+                    postalCode: isShip ? values.shippingPostalCode : null
                 },
 
                 billing: {
-                    billingName: values.billingName,
-                    billingBusinessName: values.billingBusinessName,
-                    billingLastname: values.billingLastname,
-                    billingAddressStreet: values.billingAddressAddress,
-                    billingAddressNumber: values.billingAddressNumber,
-                    billingAddressDpto: values.billingAddressDpto,
-                    billingPostalCode: values.billingPostalCode,
-                    billingPersonalId: values.billingPersonalId
+                    billingName: billingInfoRequired ? values.billingName : values.consumerName || null,
+                    billingBusinessName: billingInfoRequired ? business ? values.billingBusinessName : null : null,
+                    billingLastname: billingInfoRequired ? values.billingLastname || null : values.consumerLastname || null,
+                    billingAddressStreet: billingInfoRequired ? values.billingAddressAddress || null : values.shippingAddressAddress || null,
+                    billingAddressNumber: billingInfoRequired ? values.billingAddressNumber || null : values.shippingAddressNumber || null ,
+                    billingAddressDpto: billingInfoRequired ? values.billingAddressDpto || null : values.shippingAddressDpto || null,
+                    billingPostalCode: billingInfoRequired ? values.billingPostalCode || null : values.shippingPostalCode || null,
+                    billingPersonalId: billingInfoRequired ? values.billingPersonalId || null : values.consumerPersonalId || null
                 },
                 
                 shippingMethod: isShip ? "ship" : "pickup" ,
@@ -127,9 +132,7 @@ const Checkout = () => {
                 total: totalAmountInCart()
             }
             
-            // setOrderInCookie(orderInfo);
             changeValue(orderInfo);
-            // console.log(orderInfo);
             goToShippingMethod();
         }
     };
@@ -232,20 +235,14 @@ const Checkout = () => {
         return (
             
             <div id="checkoutForm" className="">
-                <div className="ps-5 pe-5 pt-4 pb-4 w-100">
-                    <Link to="/checkout/datos" className="btn p-0"><span className="breadcrumb-checkout">Datos</span></Link>
-                    <span className="ms-2 me-2 breadcrumb-checkout">/</span>
-                    <Link to="/checkout/entrega" className="btn p-0"><span className="breadcrumb-checkout">Entrega</span></Link>
-                    <span className="ms-2 me-2 breadcrumb-checkout">/</span>
-                    <Link to="/checkout/pago" className="btn p-0"><span className="breadcrumb-checkout">Pago</span></Link>
-                </div>
+                <Breadcrumbs/>
 
                 <div className="d-flex flex-wrap">
-                    <div className="p-5 pt-0 col-md-7 col-12">
-                        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                    <div className="p-3 p-md-5 pt-0 col-md-7 col-12">
+                        <Form validated={validated} onSubmit={handleSubmit}>
                             <div className="mb-5">
-                                <Form.Group className="mb-3" controlId="email">
-                                    <Form.Label  >Email</Form.Label>
+                                <Form.Group className="mb-3" controlId="emailP">
+                                    <Form.Label>Email</Form.Label>
                                     <Form.Control type="email" name="email" required value={values.email} onChange={handleChange} placeholder="Dejanos un email" />
                                     <Form.Text className="text-muted">
                                     Se utilizará únicamente para identificar tu compra.
@@ -253,7 +250,7 @@ const Checkout = () => {
                                 </Form.Group>
                             </div>
 
-                            <ShippingMethod 
+                            <ShippingMethod
                                 values={values}
                                 handleChange={handleChange} 
                                 handleShipOrPickup={handleShipOrPickup} 

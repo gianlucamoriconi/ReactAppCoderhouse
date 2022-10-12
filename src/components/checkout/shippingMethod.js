@@ -13,12 +13,12 @@ const ShippingMethod = (props) => {
 
     return (
         <div className="mb-5">
-            <h4 className="mb-4">¿Cómo querés recibir tu compra?</h4>
+            <h4 className="mb-4 fs-5">¿Cómo querés recibir tu compra?</h4>
             <div className="d-flex flex-wrap">
-                <Form.Group required className="mb-3 d-flex w-100" controlId="shippingMethod" onChange={handleBillingRequired}>
-                    <div className="radio-button-big col-6 ship pe-4">
+                <Form.Group className="mb-3 d-flex w-100" controlId="shippingMethod" onChange={handleBillingRequired}>
+                    <div className="radio-button-big col-6 ship pe-2">
                             <label htmlFor="shippingMethod" className="js-radio-button-label">
-                                <Form.Check className="p-0 m-0" type="radio" name="shippingMethod" value={values.shippingMethod} onClick={handleShipOrPickup} onChange={handleChange} id="ship"/>
+                                <Form.Check className="p-0 m-0" type="radio" name="shippingMethod" value={values.shippingMethod} onClick={handleShipOrPickup} onChange={handleChange} id="ship" required/>
                                 <div className="shipping-icon-container p-1 pb-0">
                                     <MdOutlineLocalShipping/>
                                 </div>
@@ -32,7 +32,7 @@ const ShippingMethod = (props) => {
                     </div>
                     <div className="radio-button-big pickup col-6">
                             <label htmlFor="shippingMethod" className="js-radio-button">
-                                <Form.Check className="p-0 m-0" type="radio" name="shippingMethod" value={values.shippingMethod} onClick={handleShipOrPickup} onChange={handleChange} id="pickup"/>
+                                <Form.Check className="p-0 m-0" type="radio" name="shippingMethod" value={values.shippingMethod} onClick={handleShipOrPickup} onChange={handleChange} id="pickup" required/>
                                 <div className="shipping-icon-container p-1 pb-0">
                                     <FaStore/>
                                 </div>

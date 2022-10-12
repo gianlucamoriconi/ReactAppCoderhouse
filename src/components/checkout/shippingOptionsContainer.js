@@ -22,7 +22,7 @@ const ShippingOptionsContainer = ({options, method}) => {
 
     return (
         <div className='d-flex flex-wrap w-100'>
-            <Form.Group required className="mb-3" controlId="shippingMethod" onChange={addShippingInOrder}>
+            <Form.Group required className="mb-3 w-100" controlId="shippingMethod" onChange={addShippingInOrder}>
             {
                 options.map((opt) => {
                     return  <ShippingOption

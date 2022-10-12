@@ -6,9 +6,8 @@ import ResumeCheckout from "./resumeCheckout";
 import { Link } from 'react-router-dom';
 import Ellipsis from "../ellipsis";
 import { OrderContext } from "../../context/orderContext";
-
-
-
+import { CartContext } from "../../context/cartContext";
+import Breadcrumbs from './breadcrumbs';
 
 
 const StepTwoShippingMethod = () => {
@@ -20,6 +19,8 @@ const StepTwoShippingMethod = () => {
     const [pickupOptions, setPickupOptions] = useState([]);
     const isShip = initShip;
     const isPickup = initPickup;
+    const { cart = {} } = useContext(CartContext);
+
 
 
     useEffect(() => {
@@ -65,45 +66,57 @@ const StepTwoShippingMethod = () => {
         }
     }, [isPickup])
 
-    return (
-        <div className='d-flex flex-wrap w-100'>
-            <div className="ps-5 pe-5 pt-4 pb-4 w-100">
-                <Link to="/checkout/datos" className="btn p-0"><span className="breadcrumb-checkout">Datos</span></Link>
-                <span className="ms-2 me-2 breadcrumb-checkout">/</span>
-                <Link to="/checkout/entrega" className="btn p-0"><span className="breadcrumb-checkout">Entrega</span></Link>
-                <span className="ms-2 me-2 breadcrumb-checkout">/</span>
-                <Link to="/checkout/pago" className="btn p-0"><span className="breadcrumb-checkout">Pago</span></Link>
-            </div>
-            <div className="p-5 pt-0 col-md-7 col-12">
-                <h4 className="mb-4">Elegí la opción de entrega</h4>
-                <div className="d-flex mb-4">
-                    {
-                        loading ? <div className="w-100 text-center"><Ellipsis/></div>: null
-                    }
 
-                    {isShip && loading === false ? 
-                        <ShippingOptionsContainer 
-                            options={shippingOptions}       
-                            method="shippingMethod"
-                        />
-                    : null}
+    if (cart.length === 0){
+        return(
+            <div className="w-100 h-80 p-5 text-center">
 
-                    {isPickup && loading === false ?
-                        <ShippingOptionsContainer 
-                            options={pickupOptions}
-                            method="pickupMethod"
-                        />
-                    : null}
-                </div>
-                <div className="d-flex">
-                    <Link to="/checkout/datos" className="col-3 me-3 btn btn-secondary">Volver</Link>
-                    <Link to="/checkout/pago" className="col-9 btn btn-primary">Ir a pagar</Link>
+                <div>
+                    <p className="mb-0">Todavía no tenés ningún producto en tu carrito. Te invitamos a mirar nuestros productos en el siguiente link:</p>
+                    <p className="mt-3"><Link to="/todos-los-productos">Ver todos los productos</Link></p>
                 </div>
             </div>
-            <ResumeCheckout/>
+        )
 
-        </div>
-    )
+    } else{
+        return (
+            <div id="checkoutForm" className='d-flex flex-wrap w-100'>
+                <Breadcrumbs/>
+                <div className="p-3 p-md-5 pt-0 col-md-7 col-12">
+                    <h4 className="mb-4 fs-5">Elegí la opción de entrega</h4>
+                    <div className="d-flex mb-4">
+                        {
+                            loading ? <div className="w-100 text-center"><Ellipsis/></div>: null
+                        }
+
+                        {isShip && loading === false ? 
+                            <ShippingOptionsContainer 
+                                options={shippingOptions}       
+                                method="shippingMethod"
+                            />
+                        : null}
+
+                        {isPickup && loading === false ?
+                            <ShippingOptionsContainer 
+                                options={pickupOptions}
+                                method="pickupMethod"
+                            />
+                        : null}
+                    </div>
+                    { !loading ? <div className="d-flex">
+                        <div className="col-3 pe-3 ">
+                            <Link to="/checkout/datos" className="w-100 btn btn-secondary">Volver</Link>
+                        </div>
+                        <div className="col-9">
+                            <Link to="/checkout/pago" className="w-100 btn btn-primary">Ir a pagar</Link>
+                        </div>
+                    </div> : null}
+                </div>
+                <ResumeCheckout/>
+
+            </div>
+        )
+    }
 }
 
 export default StepTwoShippingMethod;

@@ -98,6 +98,7 @@ font-family: 'Manrope', sans-serif;
 
 .item:hover{
   box-shadow: 0 1px 6px rgb(0 0 0 / 20%);
+  z-index: 9;
   -webkit-transition: all 0.4s ease;
     -ms-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
@@ -485,18 +486,96 @@ select{
   background: linear-gradient(180deg,#fff,hsla(0,0%,100%,0));
 }
 
-.container-items:after{
-  background: linear-gradient(271.24deg,#202124,rgba(32,33,36,0));
-  content: "";
-  display: block;
+// .container-items:after{
+//   background: linear-gradient(271.24deg,#202124,rgba(32,33,36,0));
+//   content: "";
+//   display: block;
+//   position: absolute;
+//   width: 100%;
+//   height: 9%;
+//   top: 71%;
+//   bottom: 0px;
+//   right: 0px;
+//   left: 0px;
+//   pointer-events: none;
+//   background: -webkit-linear-gradient(178.76deg,#fff,hsla(0,0%,100%,0));
+//   background: linear-gradient(0deg,#fff,hsla(0,0%,100%,0));
+// }
+
+.item-price{
+  font-size: 20px;
+}
+
+@media (max-width: 767px){
+  .item-name{
+    font-size: 13px;
+  }
+
+  .see-more-button{
+    font-size: 12px;
+  }
+
+  .item-price{
+    font-size: 16px;
+  }
+}
+
+
+.form-control, .form-check-label{
+  font-size: 14px;
+}
+
+small.form-text {
+  font-size: 12px;
+}
+
+.logo-payment svg {
+  width: 19px;
+  height: auto;
+}
+
+.breadcrumb-checkout{
+  text-decoration: none;
+}
+
+.breadcrumb-checkout.active{
+  color:#198754;
+  font-weight: 900;
+}
+
+
+/*Payment option*/
+
+.payment-option.form-check input {
   position: absolute;
   width: 100%;
-  height: 90px;
-  top: 70%;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
-  pointer-events: none;
-  background: -webkit-linear-gradient(178.76deg,#fff,hsla(0,0%,100%,0));
-  background: linear-gradient(0deg,#fff,hsla(0,0%,100%,0));
+  height: 100%;
+  border-radius: unset!important;
+  border: unset;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.payment-option.form-check {
+  position: relative;
+  padding-left: 0; /*unset padding from bootstrap*/
+}
+
+.payment-option .form-check-label {
+  padding: 20px;
+  background: white;  
+}
+
+.box-order-success{
+  background-color: #f2fbf2;
+}
+
+#orderId{
+  background: #f2fbf2;
+  border-radius: 10px;
+}
+
+.max-width-700{
+  max-width: 700px;
 }

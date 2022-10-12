@@ -7,7 +7,7 @@ const BillingForm = (props) =>{
 
     return (
             <div>
-                <h4 className="mb-4">Dirección de facturación</h4>
+                <h4 className="mb-4 fs-5">Dirección de facturación</h4>
                 <div>
 
                     <h3 className="mb-4 fs-6">¿Empresa o persona?</h3>
@@ -21,7 +21,7 @@ const BillingForm = (props) =>{
 
                     {business ?
                     <div className="d-flex">
-                        <Form.Group className="mb-3 col-6 pe-3" controlId="billingBusinessName">
+                        <Form.Group className="mb-3 col-12" controlId="billingBusinessName">
                             <Form.Control required name="billingBusinessName" value={values.billingBusinessName} onChange={handleChange} type="text" placeholder="Razón social" />
                         </Form.Group>
                     </div>

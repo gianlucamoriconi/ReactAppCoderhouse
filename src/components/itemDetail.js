@@ -104,9 +104,6 @@ const ItemDetail = ({item}) => {
         }
 
     }, [option1, option2, stock, cart])
-
-    //option1 y option 2 podría reemplazarse por una escucha al cambio de variante
-
     
     const handleAddToCart = () => {
     
