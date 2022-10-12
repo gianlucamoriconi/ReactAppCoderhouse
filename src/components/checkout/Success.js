@@ -21,6 +21,8 @@ const Success = () => {
             .then((doc) =>{
                 const orderInfo = doc.data();
                 setOrderInSuccess(orderInfo)
+                console.log(orderInfo);
+
             })
 
             .catch( (error) =>{
@@ -52,43 +54,56 @@ const Success = () => {
                         <p>Registrada bajo el email: <span className="font-monospace p-2">{orderSuccess.email}</span></p>
                     </div>
             </div>
+
+            <div className="col-md-6 col-12 me-md-3">
             {orderSuccess.shippingMethod === "ship" ?
-            <div className="box-order-success p-4 shadow-sm mb-4 col-6">
-                <h5>Datos de envío</h5>
+            <div className="box-order-success p-4 shadow-sm mb-4 col-12">
+                <h5 className="mb-3">Datos de envío {orderSuccess.billing.billingIsSameConsumer ? "y facturación": null}</h5>
                     <div>
-                        <p>Nombre: {orderSuccess.consumer.consumerName + " " + orderSuccess.consumer.consumerLastname}</p>
+                        <p className="mb-1">Nombre: {orderSuccess.consumer.consumerName + " " + orderSuccess.consumer.consumerLastname}</p>
+                        <p className="mb-1">Dirección: {orderSuccess.consumer.addressStreet + " " + orderSuccess.consumer.addressNumber}</p>
+                        <p className="mb-1">DNI/CUIL: {orderSuccess.consumer.consumerPersonalId}</p>
+                        <p className="mb-1">Código postal: {orderSuccess.consumer.postalCode}</p>
                     </div>
             </div>
             : null}
-
-            <div className="box-order-success p-4 shadow-sm mb-4 col-6">
-                <h5>Datos de facturación</h5>
+        
+            {!orderSuccess.billing.billingIsSameConsumer ?  
+            <div className="box-order-success p-4 shadow-sm mb-4 col-12">
+                <h5 className="mb-3">Datos de facturación</h5>
                 <div>
                     {orderSuccess.billing.billingBusinessName ?
-                        <p>Razón social: {orderSuccess.billing.billingBusinessName}</p>
+                        <p className="mb-1">Razón social: {orderSuccess.billing.billingBusinessName}</p>
                     : 
-                        <p>Nombre: {orderSuccess.billing.billingName + " " + orderSuccess.billing.billingLastname}</p>
+                        <p className="mb-1">Nombre: {orderSuccess.billing.billingName + " " + orderSuccess.billing.billingLastname}</p>
                     }
 
-                    <p>Calle: {orderSuccess.billing.billingAddressStreet}</p>
-                    <p>Altura: {orderSuccess.billing.billingAddressNumber}</p>
+                    <p className="mb-1">Calle: {orderSuccess.billing.billingAddressStreet}</p>
+                    <p className="mb-1">Altura: {orderSuccess.billing.billingAddressNumber}</p>
                    
                     {orderSuccess.billing.billingPersonalId ? 
-                        <p>DNI/CUIL/CUIT: {orderSuccess.billing.billingPersonalId}</p>
+                        <p className="mb-1">DNI/CUIL/CUIT: {orderSuccess.billing.billingPersonalId}</p>
                     :
                         null
                     }
                 </div>
             </div>
+            : null}
+           
 
-            <div className="box-order-success p-4 shadow-sm mb-4 col-6">
-                <h5>Medio de pago elegido</h5>
+            <div className="box-order-success p-4 shadow-sm mb-4 col-12">
+                <h5 className="mb-3">Medio de pago elegido</h5>
+                <div className="mb-3">
+                    <p className="mb-4">{orderSuccess.paymentData.title}</p>
+                </div>
+                <h5>Forma de entrega</h5>
                 <div>
-                    <p>{orderSuccess.paymentData.title}</p>
+                    <p className="mb-1">{orderSuccess.shippingData.carrier} - {orderSuccess.shippingData.name}</p>
                 </div>
             </div>
+            </div>
 
-            <div className="box-order-success p-4 shadow-sm mb-4 col-5">
+            <div className="box-order-success p-4 shadow-sm mb-4 col-12 col-md-5 ms-md-5">
                 <h5 className="mb-4">Productos comprados</h5>
                 <div>
                     <CartView cart={orderSuccess.cart}/>

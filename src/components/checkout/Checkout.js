@@ -51,6 +51,7 @@ const Checkout = () => {
         billingPersonalId: billingInfoRequired ? order.billing.billingPersonalId || '' : order.consumer.consumerPersonalId,
         billingPostalCode: billingInfoRequired ? order.billing.billingPostalCode || '' : order.consumer.postalCode,
         shippingOptionName: '',
+        billingIsSameConsumer: billingInfoRequired ? false : true,
         shippingOptionCost: ''
     });
 
@@ -123,7 +124,8 @@ const Checkout = () => {
                     billingAddressNumber: billingInfoRequired ? values.billingAddressNumber || null : values.shippingAddressNumber || null ,
                     billingAddressDpto: billingInfoRequired ? values.billingAddressDpto || null : values.shippingAddressDpto || null,
                     billingPostalCode: billingInfoRequired ? values.billingPostalCode || null : values.shippingPostalCode || null,
-                    billingPersonalId: billingInfoRequired ? values.billingPersonalId || null : values.consumerPersonalId || null
+                    billingPersonalId: billingInfoRequired ? values.billingPersonalId || null : values.consumerPersonalId || null,
+                    billingIsSameConsumer: billingInfoRequired ? false : true,
                 },
                 
                 shippingMethod: isShip ? "ship" : "pickup" ,

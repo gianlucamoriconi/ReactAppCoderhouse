@@ -584,3 +584,7 @@ small.form-text {
   align-self: flex-start;
   margin-top: 24px;
 }
+
+.btn-primary .ellipsis svg {
+  max-height: 30px;
+}

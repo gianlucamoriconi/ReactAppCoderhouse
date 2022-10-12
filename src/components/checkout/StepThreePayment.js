@@ -1,5 +1,6 @@
 import { useState, useContext, useCallback } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import Ellipsis from "../Ellipsis";
 import { CartContext } from "../../context/cartContext";
 import { OrderContext } from "../../context/orderContext";
 import ResumeCheckout from "./ResumeCheckout";
@@ -8,10 +9,11 @@ import { db } from "../../firebase/config";
 import Breadcrumbs from './Breadcrumbs';
 import PaymentOption from './PaymentOption';
 import Form from 'react-bootstrap/Form';
-import { paymentProvidersArray} from '../paymentProviders/paymentProviders';
+import { paymentProvidersArray} from '../../paymentProviders/paymentProviders';
 
 
 const StepThreePayment = () => {
+    const [loading, setLoading] = useState(false);
     const { order, changeValue } = useContext(OrderContext);
     const { cart, removeAllItems } = useContext(CartContext);
     const navigate = useNavigate();
@@ -58,6 +60,7 @@ const StepThreePayment = () => {
 
 
     function sendOrder(order) {
+        setLoading(true);
         const ordersRef = collection(db, 'orders');
         addDoc(ordersRef, order)
             .then( (doc) =>{
@@ -75,6 +78,9 @@ const StepThreePayment = () => {
             })
             .catch( (error) =>{
                 console.log(error);
+            })
+            .finally( ()=> {
+                setLoading(false);
             })
     };
 
@@ -112,6 +118,7 @@ const StepThreePayment = () => {
                                     <Form.Group required className="mb-3" controlId="payment-option" onChange={handlePaymentActive}>
                                        {paymentProvidersArray.map((payment) => (
                                             <PaymentOption
+                                                key={payment.id}
                                                 id={payment.id}
                                                 handlePaymentActive={handlePaymentActive}
                                                 paymentData={payment}
@@ -133,7 +140,7 @@ const StepThreePayment = () => {
                             </div>
                             {paymentActive.active ?
                             <div className="col-9">
-                                <button onClick={() => sendOrder(order)} className="w-100 btn btn-primary">Finalizar compra</button>
+                                <button onClick={() => sendOrder(order)} className="w-100 btn btn-primary">{loading ? <Ellipsis/> : "Finalizar compra"}</button>
                             </div>
                             : null}
                         </div>
