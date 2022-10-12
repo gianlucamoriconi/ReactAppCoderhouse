@@ -33,7 +33,6 @@ const StepThreePayment = () => {
 
         let finder = paymentProvidersArray.filter(payment => payment.id === paymentClicked);
         finder = finder[0];
-        console.log(finder);
 
         //Actualizamos la orden con la info del payment elegido
         const orderUpdate = {
@@ -59,12 +58,9 @@ const StepThreePayment = () => {
 
 
     function sendOrder(order) {
-        console.log(order);
         const ordersRef = collection(db, 'orders');
         addDoc(ordersRef, order)
             .then( (doc) =>{
-                console.log(doc.id);
-
                 const orderSuccessWithID = {
                     ...order,
                     orderId: doc.id    

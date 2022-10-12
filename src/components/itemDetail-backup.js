@@ -53,18 +53,6 @@ const ItemDetail = ({item}) => {
 
     
     const handleAddToCart = () => {
-        // if (option1 !== null && option2 == null){
-        //     console.log(variants.filter(variant => (variant.value1 === option1) && (variant.value2 === option2)));
-        // }
-
-        // if (option1 !== null && option2 !== null){
-        //     const variantC = variants.filter(variant => {
-        //         return variant.value1 === option1 && variant.value2 === option2;
-        //     });
-
-        //     console.log(variantC);
-        // }
-
 
         const itemToCart = {
             id: item.id,

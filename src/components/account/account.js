@@ -9,7 +9,6 @@ import AccountPage from "./AccountPage";
 const Account = () =>{
 
     const { login, user } = useContext(LoginContext);
-    console.log(user);
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 

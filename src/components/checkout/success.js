@@ -21,7 +21,6 @@ const Success = () => {
             .then((doc) =>{
                 const orderInfo = doc.data();
                 setOrderInSuccess(orderInfo)
-                console.log(orderInfo);
             })
 
             .catch( (error) =>{

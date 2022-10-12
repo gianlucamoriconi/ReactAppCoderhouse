@@ -70,7 +70,6 @@ const ItemListContainer = (props) => {
                 console.log(error);
             })
 
-        console.log(category);
 
     }, [categorySlug])
 
