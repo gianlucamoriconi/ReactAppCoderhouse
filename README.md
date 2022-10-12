@@ -8,7 +8,7 @@ This app is an ecommerce (demo) which contains, in general, the following sectio
 
 - Home
 - List of products (one for each category and one containing all products)
-- Detalle de producto
+- Product detail
 - Checkout (step 1, step 2, step 3 and success)
 - Cart
 - CartWidget
