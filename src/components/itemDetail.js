@@ -24,11 +24,9 @@ const ItemDetail = ({item}) => {
 
             if (hasVariants) {
                 if (isInCart(product.productId) === true){
-                    console.log("Cart has products and is in cart");
                     cart.map((itemInCart) => {
                         if (itemInCart.id === product.productId){
                             let newStock = product.stock - itemInCart.quantity;
-                            console.log("nuevo stock de variante " + newStock);
                             setStock(newStock);
                         }
                     });
@@ -37,11 +35,9 @@ const ItemDetail = ({item}) => {
                 }
             } else {
                 if (isInCart(product.id) === true){
-                    console.log("Cart has products and is in cart");
                     cart.map((itemInCart) => {
                         if (itemInCart.id === product.id){
                             let newStock = product.stock - itemInCart.quantity;
-                            console.log("nuevo stock producto Simple " + newStock);
                             setStock(newStock);
                         }
                     });
@@ -60,7 +56,6 @@ const ItemDetail = ({item}) => {
         
         //Si tiene variantes, identificamos el ID de la variante seleccionada
         if (hasVariants === true){
-
 
             //Si tiene valor en propiedad 1, cambiamos el null por el valor de la misma 
             if (value1 !== null){
