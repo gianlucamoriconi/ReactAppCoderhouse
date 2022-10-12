@@ -13,6 +13,8 @@ This app is an ecommerce (demo) which contains, in general, the following sectio
 
 It is created with [React](https://es.reactjs.org/) and It uses [Firebase](https://firebase.google.com/) as a database to store information such as orders, products, categories and available shipping methods.
 
+It uses Bootstrap v5.0.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
