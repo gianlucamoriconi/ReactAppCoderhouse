@@ -133,8 +133,7 @@ const ItemDetail = ({item}) => {
                 option1: option1,
                 option2: option2,
                 quantity: counter,
-                image: item.featuredImage,
-                text: item.text
+                image: item.featuredImage
 
             }
             addToCart(itemToCart, counter);
