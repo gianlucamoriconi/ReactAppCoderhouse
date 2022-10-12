@@ -3,7 +3,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Account from './components/account/Account';
-
 import ItemListContainer from './components/ItemListContainer';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ItemDetailContainer from './components/ItemDetailContainer';
