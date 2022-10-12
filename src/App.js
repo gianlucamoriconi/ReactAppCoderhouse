@@ -1,18 +1,18 @@
 import './scss/styles.scss';
-import Header from './components/header';
-import Footer from './components/footer';
-import Home from './components/home';
-import Account from './components/account/account';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './components/Home';
+import Account from './components/account/Account';
 
-import ItemListContainer from './components/itemListContainer';
+import ItemListContainer from './components/ItemListContainer';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import ItemDetailContainer from './components/itemDetailContainer';
+import ItemDetailContainer from './components/ItemDetailContainer';
 import { CartProvider } from './context/cartContext';
-import Cart from './components/cart';
-import Checkout from './components/checkout/checkout';
-import StepTwoShippingMethod from './components/checkout/stepTwoShippingMethod';
-import StepThreePayment from './components/checkout/stepThreePayment';
-import Success from './components/checkout/success';
+import Cart from './components/Cart';
+import Checkout from './components/checkout/Checkout';
+import StepTwoShippingMethod from './components/checkout/StepTwoShippingMethod';
+import StepThreePayment from './components/checkout/StepThreePayment';
+import Success from './components/checkout/Success';
 import { OrderProvider } from './context/orderContext';
 import { LoginProvider } from './context/loginContext';
  

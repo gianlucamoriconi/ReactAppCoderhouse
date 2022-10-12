@@ -1,5 +1,5 @@
-import ItemListContainer from './itemListContainer';
-import BannerImage from './bannerImage';
+import ItemListContainer from './ItemListContainer';
+import BannerImage from './BannerImage';
 
 const Home = () => {
     return (

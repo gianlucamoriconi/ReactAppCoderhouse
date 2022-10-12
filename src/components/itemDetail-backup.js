@@ -2,7 +2,7 @@ import ItemCount from "./itemCount";
 import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ImagesInDetail from "./imagesInDetail";
-import Variants from "./variants";
+import Variants from "./Variants";
 import { CartContext } from "../context/cartContext";
 
 const ItemDetail = ({item}) => {

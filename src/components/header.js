@@ -1,8 +1,6 @@
 import imageLogo from '../images/mars-logo.png';
-import CartWidget from './cartWidget';
-import LinkListContainer from './linkListContainer';
-import SearchForm from './searchForm';
-// import { Link } from 'react-router-dom';
+import CartWidget from './CartWidget';
+import LinkListContainer from './LinkListContainer';
 import { NavLink } from 'react-router-dom';
 
 
@@ -22,7 +20,6 @@ const Header = () => {
                         </button>
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <LinkListContainer />
-                            <SearchForm />
                         </div>
                     </div>  
             </nav>

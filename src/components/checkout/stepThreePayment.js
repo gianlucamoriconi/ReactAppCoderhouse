@@ -2,11 +2,11 @@ import { useState, useContext, useCallback } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from "../../context/cartContext";
 import { OrderContext } from "../../context/orderContext";
-import ResumeCheckout from "./resumeCheckout";
+import ResumeCheckout from "./ResumeCheckout";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/config"; 
-import Breadcrumbs from './breadcrumbs';
-import PaymentOption from './paymentOption';
+import Breadcrumbs from './Breadcrumbs';
+import PaymentOption from './PaymentOption';
 import Form from 'react-bootstrap/Form';
 import { paymentProvidersArray} from '../paymentProviders/paymentProviders';
 

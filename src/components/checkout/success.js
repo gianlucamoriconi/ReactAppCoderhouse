@@ -1,9 +1,9 @@
 import { BsBagCheck } from "react-icons/bs";
-import CartView from '../cartView';
+import CartView from '../CartView';
 import { priceARS } from '../../helpers/priceFormat';
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react"
-import Ellipsis from "../ellipsis";
+import Ellipsis from "../Ellipsis";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/config"; 
 

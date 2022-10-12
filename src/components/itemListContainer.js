@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import ItemList from "./itemList"
-import Ellipsis from "./ellipsis";
+import ItemList from "./ItemList"
+import Ellipsis from "./Ellipsis";
 // import { dataCategories } from '../helpers/categories.js';
 import { useParams } from 'react-router-dom';
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -40,7 +40,7 @@ const ItemListContainer = (props) => {
         
                 getDocs(q)
                     .then((prod) => {
-                        const productsDB = prod.docs.map( (doc) => ({ id: doc.id, ... doc.data() }) )
+                        const productsDB = prod.docs.map( (doc) => ({ id: doc.id, ...doc.data() }) )
                         setProducts(productsDB);
         
                         if (!categorySlug){

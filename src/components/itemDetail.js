@@ -1,8 +1,8 @@
-import ItemCount from "./itemCount";
+import ItemCount from "./ItemCount";
 import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import ImagesInDetail from "./imagesInDetail";
-import Variants from "./variants";
+import ImagesInDetail from "./ImagesInDetail";
+import Variants from "./Variants";
 import { CartContext } from "../context/cartContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

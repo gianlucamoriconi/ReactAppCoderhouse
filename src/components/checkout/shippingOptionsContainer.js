@@ -1,8 +1,5 @@
-
-// import { collection, addDoc, getFirestore} from "firebase/firestore";
-// import { db } from "../../firebase/config";
-import ShippingOption from './shippingOption';
-import { useState, useContext } from "react";
+import ShippingOption from './ShippingOption';
+import { useContext } from "react";
 import { OrderContext } from "../../context/orderContext";
 import Form from 'react-bootstrap/Form';
 

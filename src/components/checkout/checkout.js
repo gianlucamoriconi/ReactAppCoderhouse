@@ -4,12 +4,12 @@ import Button from 'react-bootstrap/Button';
 import { CartContext } from "../../context/cartContext";
 import { OrderContext } from "../../context/orderContext";
 
-import ResumeCheckout from "./resumeCheckout";
-import BillingForm from "./billingForm";
-import ShippingForm from "./shippingForm";
-import ShippingMethod from "./shippingMethod";
+import ResumeCheckout from "./ResumeCheckout";
+import BillingForm from "./BillingForm";
+import ShippingForm from "./ShippingForm";
+import ShippingMethod from "./ShippingMethod";
 import Form from 'react-bootstrap/Form';
-import Breadcrumbs from './breadcrumbs';
+import Breadcrumbs from './Breadcrumbs';
 
 const Checkout = () => {
 

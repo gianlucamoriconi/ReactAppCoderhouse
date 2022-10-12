@@ -33,7 +33,7 @@ const Cart = () => {
                             <div key={item.id} className="p-4">
                                 <div key={item.id} className="d-flex">
                                     <div className="col-3 item-cart-col-img">
-                                        <img className="w-100 img-item-product-cart" src={item.image}/>
+                                        <img className="w-100 img-item-product-cart" alt={item.id} src={item.image}/>
                                     </div>
                                     <div className='col-7 item-cart-col-info'>
                                         <h3>{item.name}</h3>

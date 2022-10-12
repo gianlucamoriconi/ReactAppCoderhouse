@@ -1,4 +1,4 @@
-import Select from "./select";
+import Select from "./Select";
 
 const Variants = ({property1, value1, property2, value2, setOption1, setOption2}) => {
 

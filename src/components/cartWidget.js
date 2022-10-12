@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 const CartWidget = () => {
-    const { cart, removeItem, removeAllItems, itemsQuantity, totalAmountInCart } = useContext(CartContext);
+    const { cart, removeItem, removeAllItems, totalAmountInCart } = useContext(CartContext);
 
         return (
             <div id="cartWidget">
@@ -27,7 +27,7 @@ const CartWidget = () => {
                             <div key={i}>
                             <div className="d-flex">
                                 <div className="col-3 item-cart-col-img">
-                                    <img className="w-100" src={item.image}/>
+                                    <img className="w-100" src={item.image} alt={item.name}/>
                                 </div>
                                 <div className='col-7 item-cart-col-info'>
                                     <h3 className='item-name-cart'>{item.name}</h3>

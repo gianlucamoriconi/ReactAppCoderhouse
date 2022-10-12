@@ -4,7 +4,7 @@ const BannerImage = () => {
     return (
         <>
         <div id="banner-image" className="w-100 d-flex justify-content-center mb-5">
-            <img className="banner-image-img" src={image}/>
+            <img className="banner-image-img" src={image} alt="iphone-14-banner"/>
         </div>
         </>        
     )

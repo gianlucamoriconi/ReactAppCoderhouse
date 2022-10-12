@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import ShippingOptionsContainer from './shippingOptionsContainer';
-import ResumeCheckout from "./resumeCheckout";
+import ShippingOptionsContainer from './ShippingOptionsContainer';
+import ResumeCheckout from "./ResumeCheckout";
 import { Link } from 'react-router-dom';
-import Ellipsis from "../ellipsis";
+import Ellipsis from "../Ellipsis";
 import { OrderContext } from "../../context/orderContext";
 import { CartContext } from "../../context/cartContext";
-import Breadcrumbs from './breadcrumbs';
+import Breadcrumbs from './Breadcrumbs';
 
 
 const StepTwoShippingMethod = () => {

@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState, useContext } from 'react';
 import { LoginContext } from '../../context/loginContext';
-import AccountPage from "./accountPage";
+import AccountPage from "./AccountPage";
 
 
 

@@ -1,4 +1,4 @@
-import ItemCount from "./itemCount";
+import ItemCount from "./ItemCount";
 import { Link } from 'react-router-dom';
 import { dataCategories } from '../helpers/categories.js';
 import { addToCart } from '../helpers/addToCart.js';
@@ -6,7 +6,7 @@ import { addToCart } from '../helpers/addToCart.js';
 const ItemProduct = ({product}) => {
 
  
-    const {id, featuredImage, images, name, price, stock, categories, categoriesIds, slug} = product;
+    const {id, featuredImage, name, price, stock, categories, categoriesIds, slug} = product;
 
     //Obtenemos el slug del producto para generar el link hacia el
     const productLink = "/producto/" + slug;
