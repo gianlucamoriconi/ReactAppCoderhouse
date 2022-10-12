@@ -89,7 +89,7 @@ const Checkout = () => {
 
 
 
-    //Envío de formulario en la etapa "Datos"
+    //Envío de formulario en la etapa "Datos".
     //Guarda los datos ingresados en Storage
     const handleSubmit = (event) => {
         const form = event.currentTarget;
