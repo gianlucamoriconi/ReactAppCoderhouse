@@ -84,8 +84,6 @@ const StepThreePayment = () => {
             })
     };
 
-    
-
     if (cart.length === 0){
         return(
             <div className="w-100 h-80 p-5 text-center">
@@ -97,8 +95,19 @@ const StepThreePayment = () => {
             </div>
         )
 
-    } else{
+    } 
+    
+    else if (!order.hasOwnProperty("shippingData")){
+        return(<div className="w-100 h-80 p-5 text-center">
+            <div>
+                <p className="mb-0">Esta es la etapa de <strong>pago</strong> y aún no has completado todos los campos para avanzar en esta etapa.</p>
+                <p className="mt-3"><Link to="/checkout/datos">Volver al principio del checkout para continuar con mi compra</Link></p>
+            </div>
+        </div>)
 
+    }
+
+    else {
         return (
             
             <div id="checkoutForm">
